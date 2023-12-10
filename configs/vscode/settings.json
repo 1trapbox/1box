@@ -1,0 +1,105 @@
+{
+    // 系统方面
+    "workbench.colorTheme": "GitHub Dark",
+    "workbench.iconTheme": "material-icon-theme",
+    "window.zoomLevel": 1,
+    "editor.renderWhitespace": "all",
+    "editor.fontFamily": " 'FiraCode Nerd Font', '霞鹜文楷' ",
+    "editor.fontSize": 16,
+    "security.workspace.trust.untrustedFiles": "open",
+    // 系统方面 - 终端...
+    "terminal.integrated.defaultProfile.windows": "PowerShell_7",
+    "terminal.integrated.fontFamily": "'FiraCode Nerd Font'",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell_7": {
+            "path": "E:\\Scoop\\apps\\pwsh\\current\\pwsh.exe"
+            
+        },
+        "PowerShell": null,
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        }
+    },
+
+    // 插件 color-highlight
+    "color-highlight.matchRgbWithNoFunction": true,
+    "color-highlight.matchWords": true,
+    "color-highlight.languages": [
+        "*"
+    ],
+
+
+    // 插件 better-comments
+    "better-comments.highlightPlainText": true,
+    "better-comments.tags": [
+
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        }
+    ],
+
+    // 插件 indent-rainbow
+    "indentRainbow.indicatorStyle": "light",
+    "indentRainbow.lightIndicatorStyleLineWidth": 3,
+    "indentRainbow.colors": [
+        "rgba(255,255,64,0.3)",
+        "rgba(127,255,127,0.3)",
+        "rgba(255,127,255,0.3)",
+        "rgba(79,236,236,0.3)"
+    ],
+
+    // 插件 markdown-allinone
+    "markdown-preview-enhanced.codeBlockTheme": "github-dark.css",
+    "markdown-preview-enhanced.previewTheme": "github-dark.css",
+
+}

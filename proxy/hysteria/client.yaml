@@ -1,0 +1,31 @@
+server: XXX.XXX.com:30001
+
+#验证
+auth: GhBzQkrXHF3VzHkpyb8cBV
+
+#TLS
+tls:
+  insecure: false
+  pinSHA256: 11:37:DB:AF:.... # 验证服务器的证书指纹。可以通过 openssl 获取证书指纹：openssl x509 -noout -fingerprint -sha256 -in your_cert.crt
+
+#传输 
+transport:
+  type: udp
+  #udp:
+  #  hopInterval: 30s
+
+#带宽
+bandwidth:
+  up: 1 gbps
+  down: 1 gbps
+
+#快速打开
+fastOpen: true
+
+#代理模式
+socks5:
+  listen: 127.0.0.1:10808
+  disableUDP: false
+
+http:
+  listen: 127.0.0.1:10809

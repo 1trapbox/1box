@@ -1,0 +1,60 @@
+# listen
+listen: :30001 ##端口
+
+# TLS
+tls:
+  cert: some.crt ##证书路径
+  key: some.key ##密钥路径
+
+# 带宽设置
+bandwidth:
+  up: 1 gbps
+  down: 1 gbps
+
+# UDP
+disableUDP: false
+udpIdleTimeout: 60s
+
+# 验证模式
+auth:
+  type: password
+  password: SNd3Nr9hZizVsj
+
+# DNS设置
+resolver:
+  type: udp
+  # TCP DNS
+  tcp:
+    addr: 1.1.1.1:53
+    timeout: 4s
+  # UDP DNS
+  udp:
+    addr: 1.0.0.1:53
+    timeout: 4s
+  # DNS over TLS
+  tls:
+    addr: 1.1.1.1:853
+    timeout: 10s
+    sni: cloudflare-dns.com
+    insecure: false
+  # DNS over HTTPS
+  https:
+    addr: https://cloudflare-dns.com/dns-query
+    timeout: 10s
+    sni: cloudflare-dns.com
+    insecure: false
+
+# ACL 设置
+acl:
+  inline: 
+    - reject(geoip:cn)
+  #  - reject(geoip:private)
+  # geoip: GeoLite2-Country.mmdb 
+
+# Masquerade 伪装
+masquerade:
+  proxy:
+    url: https://kariba.com/
+    rewriteHost: true
+  string:
+    statusCode: 200

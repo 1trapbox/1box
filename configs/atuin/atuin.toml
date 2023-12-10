@@ -1,0 +1,39 @@
+# Atuin配置文件
+
+#db_path / Atuin SQlite 数据库的路径, 默认为 ~/.local/share/atuin/history.db
+#db_path = "~/.history.db"
+
+#key_path / Atuin 加密密钥的路径。默认为 ~/.local/share/atuin/key.
+#key = "~/.atuin-key".
+
+#session_path / Atuin 服务器会话文件的路径。默认为 ~/.local/share/atuin/session. 这本质上只是一个 API 令牌
+#key = "~/.atuin-session"
+
+# 要同步的服务器地址 默认为https://api.atuin.sh
+#sync_address = "https://api.atuin.sh"
+
+# 配置登录时是否自动同步 默认为 true
+#auto_sync = true
+
+# 配置是否自动检查更新 默认为 true
+update_check = "true"
+
+# 自动与服务器同步的频率 s/m/h
+#sync_frequency = "1h"
+
+# 使用哪种搜索模式 "prefix"前缀、"fulltext"全文、"fuzzy"模糊、"skim"略读 默认为"fuzzy"
+search_mode = "fuzzy"
+
+# 搜索时使用的过滤器 默认"global"全局
+filter_mode = "global"
+
+# 使用的样式
+style = "full"
+
+# 立即执行命令 tab返回shell并且提供编辑机会
+enter_accept = true
+
+# 按键绑定
+# 自定义向上箭头过滤
+filter_mode_shell_up_key_binding = "directory"        # 上键修改为当前目录
+

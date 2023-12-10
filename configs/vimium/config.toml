@@ -1,0 +1,37 @@
+# Insert your preferred key mappings here.
+
+# 取消全部按键
+unmapAll
+#unmap k                                        # 单独取消k全局绑定
+
+# 浏览页面 (页面控制)
+map w scrollUp                                  # w 向上滚动
+map s scrollDown                                # s 向下滚动
+# 左右滚动感觉没必要设置 所以a/d换标签页的方向
+map r reload                                    # r 刷新(f5)
+
+# 使用vomnibar (插件附带的工具栏)
+#map b Vomnibar.activateBookmarks               # 当前页面打开书签
+#map B Vomnibar.activateBookmarksInNewTab       # 新标签页打开书签
+map h Vomnibar.activate                         # 当前页面 打开URL/书签/标签/历史记录
+map f Vomnibar.activateInNewTab                 # 新标签页 打开URL/书签/标签/历史记录
+map T Vomnibar.activateTabSelection             # 搜索所有标签页
+
+# 使用查找 (查找模式)
+map / enterFindMode                             # 进入查找模式
+map . performFind                               # 查找模式 上一个
+map , performBackwardsFind                      # 查找模式 下一个
+
+# 导航历史 (页面历史 返回书签..或页面)
+map b goBack                                    # 当前页面 返回
+map n goForward                                 # 当前页面 前进
+
+# 管理标签卡
+map t createTab                                 # 创建 新标签页
+map a previousTab                               # ←(或↑)一个标签页
+map d nextTab                                   # ↓(或→)一个标签页
+map <c-z> restoreTab                            # ctrl+z 恢复标签页
+map <c-x> removeTab                             # ctrl+x 关闭标签页
+map q visitPreviousTab                          # 切换到之前的标签页
+map <a-1> firstTab                              # 切换到第一个标签页
+map <a-2> lastTab                               # 切换到最后一个标签页

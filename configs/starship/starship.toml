@@ -1,0 +1,182 @@
+# 更新时间
+# 2023-9-20
+
+# 根据配置模式获取编辑器补全
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# 在 shell 提示符之间插入一个空行
+add_newline = true
+
+# 定义所有外观
+format = """
+$username$directory
+$status$cmd_duration
+$character"""
+
+
+# 用户名设置
+[username]
+style_user = "bg:#f44336 fg:#f8c836"                        #红色背景 黄色字
+style_root = "bg:#00994c fg:#f8c836"                        #绿色背景 黄色字
+format = "[恭喜發財]($style) [$user](fg:#f8c836) "
+disabled = false
+show_always = true
+
+# 终端的文本旁边显示一个字符
+[character]
+success_symbol = "[❯](fg:#f8c836)"                          #正确运行黄色
+error_symbol = "[❯](fg:#f44336)"                            #错误运行红色
+
+# 显示上一个命令的退出代码
+[status]
+format = "[$symbol int=$int]($style) "
+#format = "[$symbol $int $signal_name]($style)"
+style = 'fg:#f8c836'
+symbol = '🔴 Error'                                         # 原设置symbol = '🔴 Error'
+success_symbol = '🟢 Success'                               # 原设置success_symbol = '🟢 Success'
+not_executable_symbol = '🚫 file not executable'            #文件不可执行时显示的符号
+not_found_symbol = '🔍 command not found'                   #找不到命令时显示的符号
+sigint_symbol = '🔙 back'                                   #SIGINT 上显示的符号 (Ctrl + c)
+map_symbol = true
+disabled = false
+
+# 命令持续时间
+[cmd_duration]
+format = "⏱️=[$duration](fg:#deeeeb)"
+min_time = 500
+show_milliseconds = false                                   # 关闭显示毫秒
+
+# 组件目录
+[directory]
+format = '[in]($style) [$path]($style)[$read_only]($read_only_style) '
+style = "fg:#bcbcbc"
+disabled = false
+read_only = "🔒"                                            # 提示当前目录是只读的
+home_symbol = "~"                                           # 主目录的符号        
+use_os_path_sep = true                                      # 使用操作系统特定的路径分隔符
+truncation_length = 3                                       # 当前目录应截断到的父文件夹数
+truncate_to_repo = true                                     # 是否截断到当前所在的 git 存储库的根目录
+
+
+# 显示系统主机名
+[hostname]
+ssh_only = true
+ssh_symbol = '🌏'
+format = "$ssh_symbol "
+disabled = false
+
+# 显示系统logo
+[os]
+format = "$symbol"
+disabled = false
+
+# 系统标识样式
+[os.symbols]
+Linux = " "
+openSUSE = " "
+Ubuntu = " "
+Debian = " "
+Windows = " "
+Fedora = " "
+
+# 显示环境变量
+[env_var]
+variable = 'SHELL'
+default = 'unknown shell'
+disabled = false
+
+[aws]
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[docker_context]
+format = 'via [$symbol$context]($style) '
+symbol = " "
+style = "fg:#c3b6a6"
+disabled = false
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = "⌘ "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[meson]
+symbol = "喝 "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+
+[pijul_channel]
+symbol = "🪺 "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "ﳒ "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[spack]
+symbol = "🅢 "
