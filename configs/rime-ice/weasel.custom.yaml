@@ -1,0 +1,8 @@
+# 自定义应用默认为"英文模式"
+  app_options:
+    brave.exe: {ascii_mode: true}
+    cmd.exe: {ascii_mode: true}
+    code.exe: {ascii_mode: true}
+    notion.exe: {ascii_mode: true}
+    pwsh.exe: {ascii_mode: true}
+    windowsterminal.exe: {ascii_mode: true}

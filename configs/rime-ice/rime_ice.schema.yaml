@@ -1,0 +1,5 @@
+# switches
+# 设置默认是英文标点
+  - name: ascii_punct # 中英标点
+    states: [ ¥, $ ]
+    reset: 1          #默认是0 设置为1=默认英文标
