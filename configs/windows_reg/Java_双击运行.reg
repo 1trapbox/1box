@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Applications\javaw.exe\shell\open\command]
+@="\"E:\\Scoop\\apps\\graalvm21-jdk21\\current\\bin\\javaw.exe\" -jar \"%1\" %*"
+
+// 提示选择默认打开的应用
+// @="\"C:\\Program Files\\Java\\jre1.8.0_191\\bin\\javaw.exe\" -jar \"%1\""
+
+
+
+// Windows Registry Editor Version 5.00
+//[HKEY_CLASSES_ROOT\jarfile\shell\open\command]
+//@="\"E:\\Scoop\\apps\\graalvm21-jdk21\\current\\bin\\javaw.exe\" -jar \"%1\" %*"
