@@ -1,5 +1,5 @@
 Windows Registry Editor Version 5.00
-
+// https://www.elevenforum.com/t/add-or-remove-customize-this-folder-on-context-menu-and-properties-in-windows-11.9395/
 // 恢复文件夹右键自定义页面
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
 "NoCustomizeThisFolder"=-
