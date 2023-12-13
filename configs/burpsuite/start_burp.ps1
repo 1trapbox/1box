@@ -4,7 +4,7 @@
 $workingDirectory = "E:\1trapshell\Burpsuite"
 Set-Location -Path $workingDirectory
 
-    pwsh -NoExit -WindowStyle Hidden -c {
+    pwsh -WindowStyle Hidden -c {
     # Run Java command
     java `
     -XX:+IgnoreUnrecognizedVMOptions `
@@ -14,5 +14,5 @@ Set-Location -Path $workingDirectory
     --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED `
     --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED `
     -javaagent:burpsuitloader-3.7.17-all.jar=loader,hanizfy `
-    -jar burpsuite_pro_v2023.10.1.2.jar
+    -jar burpsuite_pro_v2023.11.1.3.jar
 }
