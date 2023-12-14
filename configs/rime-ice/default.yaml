@@ -1,8 +1,0 @@
-# ascii_composer
-# 设置回车键下面的shift键支持切换中英
-    Shift_R: commit_code  # 回车键下的shit键支持切换大小写
-
-
-# key_binder 快捷键
-# 自定义快捷键 设置小键盘回车键等于回车键
-    - {accept: KP_Enter, send: Return, when: composing}
