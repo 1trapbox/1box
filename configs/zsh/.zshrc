@@ -76,10 +76,10 @@ autoload -Uz _zinit
 zinit light zdharma-continuum/zinit-annex-binary-symlink        # 🌟依赖 zinit 附件二进制符号链接
 zinit load asdf-vm/asdf                                         # asdf版本管理器
 
-zinit from"gh-r" lbin for @eza-community/eza                    # 维护更勤快的exa
-zinit from"gh-r" lbin for @sharkdp/bat                          # 替代cat
+zinit from"gh-r" lbin"eza" for @eza-community/eza               # 维护更勤快的exa
+zinit from"gh-r" lbin"bat" for @sharkdp/bat                     # 替代cat
 zinit from"gh-r" lbin"rg" for @BurntSushi/ripgrep               # rg
-
+zinit from"gh-r" lbin"fd" for @sharkdp/fd                       # fd
 zinit from"gh-r" lbin for @atuinsh/atuin                        # atuin/shell的云同步历史记录
 eval "$(atuin init zsh)"                                        # atuin zsh小部件
 
