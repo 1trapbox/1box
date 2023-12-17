@@ -76,7 +76,7 @@ function install_ohmyzsh() {
 
     print_echo "正在将zsh设置为默认shell..."
     sleep 2
-    if chsh -s "$(which zsh)"; then
+    if sudo chsh -s "$(which zsh)"; then
         print_ok "设置zsh为默认shell 成功"
     else
         print_error "设置zsh为默认shell 失败"
