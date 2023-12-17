@@ -73,6 +73,14 @@ function install_ohmyzsh() {
     else
         print_error "ohmyzsh 安装失败"
     fi
+
+    print_echo "正在将zsh设置为默认shell..."
+    sleep 2
+    if (chsh -s $(which zsh)); then
+        print_ok "设置zsh为默认shell 成功"
+    else
+        print_error "设置zsh为默认shell 失败"
+    fi
 }
 
 
@@ -98,14 +106,12 @@ function re_zshrc() {
 }
 
 function install_zinit() {
-    print_echo "正在将zsh设置为默认shell..."
-    sleep 2
-    if (chsh -s $(which zsh)); then
-        print_ok "设置zsh为默认shell 成功"
+    if (zsh -c "source ~/.zshrc"); then
+    print_echo "zinit安装成功"
     else
-        print_error "设置zsh为默认shell 失败"
+    print_error "zinit安装失败"
     fi
-    print_echo "重启运行exec zsh"
+    exec zsh
 }
 
 function all_config() {
