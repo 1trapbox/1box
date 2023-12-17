@@ -73,14 +73,6 @@ function install_ohmyzsh() {
     else
         print_error "ohmyzsh 安装失败"
     fi
-
-    print_echo "正在将zsh设置为默认shell..."
-    sleep 2
-    if sudo chsh -s "$(which zsh)"; then
-        print_ok "设置zsh为默认shell 成功"
-    else
-        print_error "设置zsh为默认shell 失败"
-    fi
 }
 
 
@@ -106,6 +98,14 @@ function re_zshrc() {
 }
 
 function install_zinit() {
+    print_echo "正在将zsh设置为默认shell..."
+    sleep 2
+    if sudo chsh -s "$(which zsh)"; then
+        print_ok "设置zsh为默认shell 成功"
+    else
+        print_error "设置zsh为默认shell 失败"
+    fi
+
     print_echo "正在安装zinit (手动安装模式)..."
     sleep 2
     # 重新加载 Zsh 以安装 Zinit：
