@@ -114,6 +114,7 @@ function install_zinit() {
     else
     print_error "重新加载zsh以安装zinit... 失败"
     fi
+    exec zsh
     source ~/.zshrc
 }
 
@@ -162,6 +163,6 @@ function all_config() {
 update_system
 install_packages
 install_ohmyzsh
-all_config
 re_zshrc
+all_config
 install_zinit
