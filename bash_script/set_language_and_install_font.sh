@@ -57,7 +57,8 @@ function install_font() {
     sarasa_gothic_font_url="https://github.com/be5invis/Sarasa-Gothic/releases/download/v${sarasa_gothic_latest_version}/${sarasa_gothic_font_filename}"
     print_echo "正在安装"更纱黑体"字体..."
     # 7z解压缩
-    sudo apt-get install p7zip-full
+    sudo apt-get install p7zip-full -y
+
     if (curl -L -o /tmp/${sarasa_gothic_font_filename} ${sarasa_gothic_font_url}); then
         print_echo "下载"更纱黑体"字体成功"
     else
