@@ -64,6 +64,7 @@ function install_font() {
     else
         print_error "下载"更纱黑体"字体失败"
     fi
+    sleep 10
     # 解压字体
     if (cd /tmp && 7z x /tmp/${sarasa_gothic_font_filename}); then
         print_echo "${sarasa_gothic_font_filename} 解压成功"
