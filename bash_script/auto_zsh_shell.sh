@@ -108,13 +108,13 @@ function install_zinit() {
 
     print_echo "正在安装zinit (手动安装模式)..."
     sleep 2
-    # 重新加载 Zsh 以安装 Zinit：
-    if exec zsh; then
+    # 启动新的 Zsh 实例以安装 Zinit
+    if zsh; then
     print_echo "重新加载zsh以安装zinit... 成功"
     else
     print_error "重新加载zsh以安装zinit... 失败"
     fi
-    source ~/.zshrc
+    source "$HOME/.zshrc"
 }
 
 function all_config() {
