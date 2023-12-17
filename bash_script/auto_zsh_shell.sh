@@ -89,7 +89,7 @@ function re_zshrc() {
         # 如果文件不存在，则创建并写入内容
         touch "$HOME/.zshrc"
     if (curl -s "$zshrc_config_file_url" > "$zshrc_config_file"); then
-        print_ok "starship 配置文件创建并重写成功\n 路径=$zshrc_config_file"
+        print_ok "配置文件创建并重写成功\n 路径=$zshrc_config_file"
     else
         print_error "$zshrc_config_file 重写失败"
     fi
@@ -139,7 +139,6 @@ function all_config() {
     fi
     fi
     # starship
-    # shellcheck disable=SC2140
     print_echo "正在创建"starship"配置文件..."
     sleep 2
     local starship_config_file="$HOME/.config/starship/my_starship.toml"
@@ -162,6 +161,6 @@ function all_config() {
 update_system
 install_packages
 install_ohmyzsh
-re_zshrc
 all_config
+re_zshrc
 install_zinit
