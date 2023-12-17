@@ -114,6 +114,7 @@ function install_zinit() {
     else
     print_error "重新加载zsh以安装zinit... 失败"
     fi
+    exec zsh
 }
 
 function all_config() {
