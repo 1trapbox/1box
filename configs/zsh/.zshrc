@@ -9,7 +9,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/"
 
-# 一些程序的环境变量/设置
+# 快捷键
+# zsh实时自动补全设置 @marlonrichert/zsh-autocomplete
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
 # alias设置
 alias hh="tr ':' '\n'"                          # 换行 拼音hh
@@ -92,6 +95,3 @@ zinit light jeffreytse/zsh-vi-mode                              # zsh更好的vi
 zinit light MichaelAquilina/zsh-you-should-use                  # zsh 你应该使用alias
 #zinit light zsh-users/zsh-autosuggestions                       # zsh自动补全
 
-# zsh实时自动补全设置 @marlonrichert/zsh-autocomplete
-bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
