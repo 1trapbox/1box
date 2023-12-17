@@ -14,13 +14,13 @@ ok_style="\033[37;42m"
 
 # 简单的输出
 function print_ok() {
-    ok="${ok_style}${bold}[OK 成功]${font}"
+    ok="${ok_style}${bold}[OK]${font}"
     echo -e "${ok}"
     echo -e "${green}${bold}$1${font}\n"
 }
 
 function print_error() {
-    error="${error_style}${bold}[ERROR 失败]${font}"
+    error="${error_style}${bold}[ERROR]${font}"
     echo -e "${error}"
     echo -e "${red}${bold}$1${font}\n"
 }
@@ -41,13 +41,12 @@ function update_system() {
 
 function install_packages() {
     print_echo "正在安装以下软件包\n
+        zsh zsh\n
         curl curl\n
         wget wget\n
         git git\n
+        unzip unzip解压缩\n
         neofetch 系统信息\n
-        bat 更好的cat\n
-        exa 更好的ls\n
-        zsh zsh\n
         fonts-firacode fira编程字体\n
         "
     sleep 2
@@ -55,9 +54,9 @@ function install_packages() {
         curl \
         wget \
         git \
-        exa \
-        bat \
         zsh \
+        unzip \
+        neofetch \
         fonts-firacode \
         ); then
         print_ok "软件包 安装成功"
@@ -66,7 +65,7 @@ function install_packages() {
     fi
 }
 
-function install_ohmyzhs() {
+function install_ohmyzsh() {
     print_echo "正在安装ohmyzsh..."
     sleep 2
     if (yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"); then
@@ -77,74 +76,92 @@ function install_ohmyzhs() {
 
     print_echo "正在将zsh设置为默认shell..."
     sleep 2
-    if (chsh -s $(which zsh)); then
+    if chsh -s "$(which zsh)"; then
         print_ok "设置zsh为默认shell 成功"
     else
         print_error "设置zsh为默认shell 失败"
     fi
 }
 
-function rewrite_zshrc() {
-    print_echo "正在重写.zshrc配置文件..."
+
+function re_zshrc() {
+    print_echo "正在重写".zshrc"配置文件..."
     sleep 2
-    local remote_file="https://raw.githubusercontent.com/1trapbox/1box/main/zsh/.zshrc"
-    local local_file="$HOME/.zshrc"
-
-    # 下载远程文件并写入到本地文件
-    if curl -sSL "$remote_file" > "$local_file"; then
-        print_ok "$local_file 重写成功"
+    local zshrc_config_file="$HOME/.zshrc"
+    local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
+    if [ -e "$zshrc_config_file" ]; then
+        # 如果文件存在，则重写所有内容
+        curl -s "$zshrc_config_file_url" > "$zshrc_config_file"
+        print_ok "zshrc 配置文件已重写成功\n 路径=$zshrc_config_file"
     else
-        print_error "$local_file 重写失败"
+        # 如果文件不存在，则创建并写入内容
+        touch "$HOME/.zshrc"
+    if (curl -s "$zshrc_config_file_url" > "$zshrc_config_file"); then
+        print_ok "starship 配置文件创建并重写成功\n 路径=$zshrc_config_file"
+    else
+        print_error "$zshrc_config_file 重写失败"
     fi
-}
-
-function create_starship_config() {
-    print_echo "正在创建starship配置文件..."
-    sleep 2
-    local config_dir="$HOME/.config"
-    local config_file="$config_dir/my_starship.toml"
-    local remote_file="https://raw.githubusercontent.com/1trapbox/1box/main/starship/starship.toml"
-
-    # 检查配置目录是否存在，如果不存在则创建
-    if [ ! -d "$config_dir" ]; then
-        mkdir -p "$config_dir"
-        print_echo "$config_dir 创建目录成功"
-    else
-        print_ok "$config_dir 目录已存在"
     fi
 
-    # 下载远程文件并写入到本地文件
-    if curl -sSL "$remote_file" > "$config_file"; then
-        print_ok "$config_file 创建并重写成功"
-    else
-        print_error "$config_file 创建或重写失败"
-    fi
 }
 
 function install_zinit() {
     print_echo "正在安装zinit (手动安装模式)..."
     sleep 2
-
     # 重新加载 Zsh 以安装 Zinit：
     if exec zsh; then
     print_echo "重新加载zsh以安装zinit... 成功"
     else
     print_error "重新加载zsh以安装zinit... 失败"
     fi
+    source ~/.zshrc
+}
 
-    # 验证zinit是否成功安装
-    if (zsh -c "zinit version"); then
-        print_ok "zinit安装... 成功"
+function all_config() {
+    print_echo "正在进行一些程序的配置"
+    sleep 2
+
+    print_echo "正在创建"atuin"配置文件"
+    sleep 2
+    local atuin_config_file="$HOME/.config/atuin/config.toml"
+    local atuin_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/atuin/config.toml"
+    if [ -e "$atuin_config_file" ]; then
+        # 如果文件存在，则重写所有内容
+        curl -s "$atuin_config_file_url" > "$atuin_config_file"
+        print_ok "atuin 配置文件已重写成功\n 路径=$atuin_config_file"
     else
-        print_error "zinit安装... 失败"
+        # 如果文件不存在，则创建并写入内容
+        mkdir -p "$HOME/.config/atuin"
+    if (curl -s "$atuin_config_file_url" > "$atuin_config_file") ;then
+        print_ok "atuin 配置文件创建并重写成功\n 路径=$atuin_config_file"
+    else
+        print_error "$atuin_config_file 重写失败"
+    fi
+    fi
+    # starship
+    # shellcheck disable=SC2140
+    print_echo "正在创建"starship"配置文件..."
+    sleep 2
+    local starship_config_file="$HOME/.config/starship/my_starship.toml"
+    local starship_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/starship/my_starship.toml"
+    if [ -e "$starship_config_file" ]; then
+        # 如果文件存在，则重写所有内容
+        curl -s "$starship_config_file_url" > "$starship_config_file"
+        print_ok "starship 配置文件已重写成功\n 路径=$starship_config_file"
+    else
+        # 如果文件不存在，则创建并写入内容
+        mkdir -p "$HOME/.config/starship"
+    if (curl -s "$starship_config_file_url" > "$starship_config_file") ;then
+        print_ok "starship 配置文件创建并重写成功\n 路径=$starship_config_file"
+    else
+        print_error "$starship_config_file 重写失败"
+    fi
     fi
 }
 
-
-
 update_system
 install_packages
-install_ohmyzhs
-rewrite_zshrc
-create_starship_config
+install_ohmyzsh
+all_config
+re_zshrc
 install_zinit

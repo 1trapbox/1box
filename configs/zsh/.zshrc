@@ -85,7 +85,7 @@ eval "$(atuin init zsh)"                                        # atuin zsh小�
 
 zinit from"gh-r" lbin"starship" for @starship/starship          # starship
 eval "$(starship init zsh)"                                     # starship 导入zsh
-export STARSHIP_CONFIG=$HOME/.config/my_starship.toml           # starship 配置文件
+export STARSHIP_CONFIG=$HOME/.config/starship/my_starship.toml  # starship 配置文件
 
 # zsh一些插件
 zinit light zdharma-continuum/fast-syntax-highlighting          # zinit 语法高亮
