@@ -36,4 +36,3 @@ enter_accept = true
 # 按键绑定
 # 自定义向上箭头过滤
 filter_mode_shell_up_key_binding = "directory"        # 上键修改为当前目录
-
