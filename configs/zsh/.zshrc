@@ -17,7 +17,7 @@ bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 # alias设置
 alias hh="tr ':' '\n'"                          # 换行 拼音hh
 alias hist="atuin"                              # 列出历史记录的目录（默认：所有目录）
-alias fd="fdfind -H"                            # 更好的find -H显示隐藏文件
+alias fd="fd -H"                            # 更好的find -H显示隐藏文件
 alias cl="clear"                                # 洁癖
 alias zshconfig="nano ~/.zshrc"                 # 打开zsh配置文件
 alias toptop="glances"                          # 系统管理器
