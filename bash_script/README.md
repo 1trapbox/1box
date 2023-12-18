@@ -12,3 +12,7 @@ curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_
 ```
 curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/set_language_and_install_font.sh | bash
 ```
+### 安装配置nginx
+```
+curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_nginx.sh | bash
+```
