@@ -310,6 +310,17 @@ function mv_nginx() {
     fi
 }
 
+# 检查和创建nobody用户组
+function check_nobody_group() {
+    print_echo "正在创建用户组nobody..."
+    if sudo grep -q -E '^nobody:' /etc/group; then
+        print_ok "用户组nobody已存在 无需创建"
+    else
+        sudo groupadd nobody
+        print_ok "用户组nobody创建成功"
+    fi
+}
+
 # 启动nginx服务
 function start_nginx_service() {
     print_echo "正在启动nginx服务..."
@@ -376,18 +387,6 @@ function backup_nginx_config() {
     fi
 }
 
-# 检查和创建nobody用户组
-function check_nobody_group() {
-    print_echo "正在创建用户组nobody..."
-    if grep -q -E '^nobody:' /etc/group; then
-        print_ok "用户组nobody已存在 无需创建"
-    else
-        sudo groupadd nobody
-        print_ok "用户组nobody创建成功"
-    fi
-}
-
-
 # 更新nginx
 function update_nginx() {
     # 获取当前nginx版本
@@ -416,6 +415,7 @@ function update_nginx() {
                 create_nginx_conf
                 remove_nginx_package
                 mv_nginx
+                check_nobody_group
                 create_nginx_service_file
                 start_nginx_service
                 self_start_nginx_service
@@ -430,6 +430,7 @@ function update_nginx() {
                 create_nginx_conf
                 remove_nginx_package
                 mv_nginx
+                check_nobody_group
                 create_nginx_service_file
                 start_nginx_service
                 self_start_nginx_service
@@ -474,6 +475,8 @@ function nginx_operation() {
             create_nginx_conf
             # 复制二进制文件到/usr/local/bin
             mv_nginx
+            # 检查创建nobody用户组
+            check_nobody_group
             # 创建nginx服务文件
             create_nginx_service_file
             # 启动nginx服务
