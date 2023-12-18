@@ -379,13 +379,14 @@ function backup_nginx_config() {
 # 检查和创建nobody用户组
 function check_nobody_group() {
     print_echo "正在创建用户组nobody..."
-    if getent group nobody &> /dev/null; then
-        print_echo "用户组nobody已存在 无需创建"
+    if grep -q -E '^nobody:' /etc/group; then
+        print_ok "用户组nobody已存在 无需创建"
     else
         sudo groupadd nobody
         print_ok "用户组nobody创建成功"
     fi
 }
+
 
 # 更新nginx
 function update_nginx() {
