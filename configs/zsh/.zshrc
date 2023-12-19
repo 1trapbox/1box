@@ -10,9 +10,10 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/"
 
 # alias设置
+alias xcopy="xclip -selection clipboard"        # 使用xclip复制到系统粘贴板
 alias hh="tr ':' '\n'"                          # 换行 拼音hh
 alias hist="atuin"                              # 列出历史记录的目录（默认：所有目录）
-alias fd="fd -H"                            # 更好的find -H显示隐藏文件
+alias fd="fd -H"                                # 更好的find -H显示隐藏文件
 alias cl="clear"                                # 洁癖
 alias zshconfig="nano ~/.zshrc"                 # 打开zsh配置文件
 alias toptop="glances"                          # 系统管理器
@@ -71,10 +72,13 @@ autoload -Uz _zinit
 zinit light zdharma-continuum/zinit-annex-binary-symlink        # 🌟依赖 zinit 附件二进制符号链接
 zinit load asdf-vm/asdf                                         # asdf版本管理器
 
+## 插件@zinit-annex-binary-symlink
 zinit from"gh-r" lbin"eza" for @eza-community/eza               # 维护更勤快的exa
 zinit from"gh-r" lbin"bat" for @sharkdp/bat                     # 替代cat
 zinit from"gh-r" lbin"rg" for @BurntSushi/ripgrep               # rg
 zinit from"gh-r" lbin"fd" for @sharkdp/fd                       # fd
+
+### 插件@zinit-annex-binary-symlink 带参数的
 zinit from"gh-r" lbin for @atuinsh/atuin                        # atuin/shell的云同步历史记录
 eval "$(atuin init zsh)"                                        # atuin zsh小部件
 
