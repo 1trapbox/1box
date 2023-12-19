@@ -3,6 +3,8 @@
 
 # 环境变量
 export ZSH="$HOME/.oh-my-zsh"                   # ohmyzsh安装路径
+# 服务器环境变量
+. "/root/.acme.sh/acme.sh.env"                  # acme.sh环境变量
 
 # 环境变量 - XDG目录规范
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -24,6 +26,7 @@ alias xrayconf="cd /usr/local/etc/xray/"        # xray配置文件目2录
 alias acme.sh=~/.acme.sh/acme.sh                # acme证书
 alias sourcezsh='source ~/.zshrc'               # 刷新zsh
 alias setproxy='export http_proxy=http://192.168.0.168:10809; export https_proxy=http://192.168.0.168:10809'
+alias upzshrc='mv ~/.zshrc ~/.zshrc.bak && echo "备份.zshrc成功" && curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o ~/.zshrc && echo "更新.zshrc成功"'
 
 # alias设置 - 解压缩
 alias gz='tar -xzvf'                            # gz解压缩
