@@ -80,6 +80,7 @@ zinit from"gh-r" lbin"eza" for @eza-community/eza               # 维护更勤�
 zinit from"gh-r" lbin"bat" for @sharkdp/bat                     # 替代cat
 zinit from"gh-r" lbin"rg" for @BurntSushi/ripgrep               # rg
 zinit from"gh-r" lbin"fd" for @sharkdp/fd                       # fd
+zinit from"gh-r" lbin"!nvim" for @neovim/neovim                 # 使用nvim
 
 ### 插件@zinit-annex-binary-symlink 带参数的
 zinit from"gh-r" lbin for @atuinsh/atuin                        # atuin/shell的云同步历史记录
