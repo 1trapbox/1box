@@ -17,16 +17,26 @@ function print_ok() {
     ok="${ok_style}${bold}[OK]${font}"
     echo -e "${ok}"
     echo -e "${green}${bold}$1${font}\n"
+    sleep 8
 }
 
 function print_error() {
+    # 重定向错误信息到日志文件 
+    exec 2>> /tmp/error.txt
+    # 记录当前函数名
+    echo "From function: ${FUNCNAME[1]}" >> /tmp/nginx_error.txt
+    # 样式
     error="${error_style}${bold}[ERROR]${font}"
     echo -e "${error}"
     echo -e "${red}${bold}$1${font}\n"
+    # 恢复标准错误 
+    exec 2>&1
+    sleep 5
 }
 
 function print_echo() {
     echo -e "${yellow}${bold}$1${font}\n"
+    
 }
 
 # 更新系统/包
