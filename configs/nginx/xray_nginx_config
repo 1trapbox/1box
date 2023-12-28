@@ -11,17 +11,17 @@ error_log /opt/nginx/logs/xray_nginx_error.log;
 stream {
     map $ssl_preread_server_name $backend_name {
         x.x.com         vless;  #对应 vless+tls+xtls-rprx-vision 的域名，修改为自己的。
-        x.x.com         trojan; #对应 trojan+tcp+tls 的域名，修改为自己的。
-        x.x.com         http2;  #对应 HTTP/2 server 的域名，修改为自己的。
+        x.x.com         trojan; #对应 trojan 的域名，修改为自己的。
+        x.x.com         http2;  #对应 HTTP/2  的域名，修改为自己的。
     }
     upstream vless {
-        server unix:/dev/shm/vless.sock; #转给 VLESS+Vision+REALITY 监听进程
+        server unix:/dev/shm/vless.sock;    #转给 vless+tls+xtls-rprx-vision 监听进程
     }
     upstream trojan {
-        server unix:/dev/shm/trojan.sock; #转给 Trojan+TCP+TLS 监听进程
+        server unix:/dev/shm/trojan.sock;   #转给 trojan 监听进程
     }
     upstream http2 {
-        server unix:/dev/shm/http2.sock; #转给 HTTP/2 server 监听进程
+        server unix:/dev/shm/http2.sock;    #转给 HTTP/2 监听进程
     }
     server {
         listen 443;
@@ -42,14 +42,16 @@ http {
     sendfile on;
     keepalive_timeout 65;
 
+    # HTTP 301 HTTPS server block
     server {
         listen 80;
         listen [::]:80; #无 IPv6，此项可删除。
         return 301 https://$host$request_uri;
     }
 
+    # HTTP/2 server block
     server {
-        listen unix:/dev/shm/http2.sock ssl http2 proxy_protocol; #使用 HTTP/2 server 监听进程，且开启 PROXY protocol 接收。
+        listen unix:/dev/shm/http2.sock ssl http2 proxy_protocol;
         http2 on;
         set_real_ip_from unix:;
         real_ip_header proxy_protocol;
