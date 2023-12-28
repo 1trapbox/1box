@@ -1,7 +1,7 @@
-# xray_nginx_config
+# xray_nginx_config_UDS
 # 更新时间: 2023-12-26
 # (改)https://github.com/lxhao61/integrated-examples/tree/main/Xray(M%2BF%2BB%2BG%2BA)%2BNginx
-# https://cnix.win/87.html
+#     https://cnix.win/87.html
 # .sock没有权限记得赋予
 # sudo chown -R nobody:nobody /dev/shm
 # sudo chmod -R 755 /dev/shm
