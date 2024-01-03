@@ -59,11 +59,10 @@ function set_language() {
         print_error "设置英文为默认语言 失败"
     fi
 }
-
 function install_font() {
     # 安装更纱黑体 Sarasa Gothic
     sarasa_gothic_latest_version=$(curl -s https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest | grep 'tag_name' | cut -d '"' -f 4 | sed 's/^v//')
-    sarasa_gothic_font_filename="sarasa-gothic-super-ttc-${sarasa_gothic_latest_version}.7z"
+    sarasa_gothic_font_filename="Sarasa-SuperTTC-${sarasa_gothic_latest_version}.7z"
     sarasa_gothic_font_url="https://github.com/be5invis/Sarasa-Gothic/releases/download/v${sarasa_gothic_latest_version}/${sarasa_gothic_font_filename}"
     sleep 5
     print_echo "正在安装p7zip-full..."

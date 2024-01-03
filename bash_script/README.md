@@ -6,7 +6,7 @@ curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_
 ```
 curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_zsh_shell.sh > auto_zsh_shell.sh && chmod +x auto_zsh_shell.sh && bash auto_zsh_shell.sh
 ```
-### 配置系统语言和安装中文字体
+### 配置系统语言和安装中文字体 (下载到本地使用)
 ```
 curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/set_language_and_install_font.sh | bash
 ```
