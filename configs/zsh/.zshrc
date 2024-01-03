@@ -4,7 +4,7 @@
 # 环境变量
 export ZSH="$HOME/.oh-my-zsh"                   # ohmyzsh安装路径
 # 服务器环境变量
-. "/root/.acme.sh/acme.sh.env"                  # acme.sh环境变量
+#. "/root/.acme.sh/acme.sh.env"                  # acme.sh环境变量
 
 # 环境变量 - XDG目录规范
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -35,7 +35,7 @@ alias zip='unzip'                               # zip解压缩
 alias bz2='tar -xjvf'                           # bz2解压缩
 
 # alias设置 - exa
-alias ls='eza -la --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                             # 显示所有文件，包括隐藏文件
+alias ls='eza -ls --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                             # 显示文件
 alias la='eza -la --icons --tree --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                      # 显示所有文件，包括隐藏文件，显示目录下的文件(--tree) 包括隐藏文件
 alias ll='eza -la --icons --links --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                     # 显示所有文件，包括隐藏文件，显示每个文件的硬链接
 alias lb='eza -la --icons -r - --sort=size --git --time-style="+%Y/%m/%d %H:%M"-iso'                    # 大小排列
