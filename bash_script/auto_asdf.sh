@@ -12,13 +12,13 @@ error_style="\033[37;41m"
 ok_style="\033[37;42m"
 
 # version
-node_version="node --version"
-npm_version="npm --version"
-java_version="java --version | rg java"
-python_version="python --version"
-pipx_version="pipx --version"
-pip_version="pip --version"
-go_version="go version"
+node_version="$(node --version)"
+npm_version="$(npm --version)"
+java_version="$(java --version | rg java)"
+python_version="$(python --version)"
+pipx_version="$(pipx --version)"
+pip_version="$(pip --version)"
+go_version="$(go version)"
 # 简单的输出
 function print_ok() {
     ok="${ok_style}${bold}[OK]${font}"
@@ -183,9 +183,9 @@ EOF
     if grep -q "$search_line" "$zshrc_file"; then
     # 在匹配行的下一行插入内容
         sudo sed -i "${line_number}r ${tmpfile}" "${zshrc_file}"
-        echo "修改 $zshrc_file 成功"
+        print_ok "修改 $zshrc_file 成功"
     else
-        echo "修改 $zshrc_file 失败"
+        print_error "修改 $zshrc_file 失败"
     fi
 }
 
