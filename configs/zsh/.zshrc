@@ -50,8 +50,8 @@ alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'                    
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'                                    # 全局--help 使用bat输出
 
 # alias设置 - zinit
-alias zup='zinit self-update'                                                                           # 更新zinit本身
-alias zupall='zinit update'                                                                             # 更新zinit安装的软件包
+alias upz='zinit self-update'                                                                           # 更新zinit本身
+alias upzall='zinit update'                                                                             # 更新zinit安装的软件包
 
 # oh-my-zsh 设置 取消=注释即可
 CASE_SENSITIVE="true"                           # 使用区分大小写的自动补全
