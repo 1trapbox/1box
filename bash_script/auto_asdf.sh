@@ -1,6 +1,6 @@
 #! /bin/bash
 # 使用asdf安装java, python, nodejs, pipx, go...
-# 更新日期：2023-1-14
+# 更新日期：2024-1-14
 
 # ANSI 颜色代码
 font="\033[0m"

@@ -1,6 +1,6 @@
 #! /bin/bash
 # 用于设置语言编码和安装字体
-# 更新日期：2023-9-21
+# 更新日期：2024-1-24
 
 # ANSI 颜色代码
 font="\033[0m"
@@ -69,15 +69,15 @@ function install_font() {
     # 7z解压缩
     sudo apt-get install p7zip-full -y
     sleep 5
-    print_echo "正在安装"更纱黑体"字体..."
-    if (curl -L -o /tmp/${sarasa_gothic_font_filename} ${sarasa_gothic_font_url}); then
-        print_echo "下载"更纱黑体"字体成功"
+    print_echo "正在安装 更纱黑体 字体..."
+    if (curl -L -o /tmp/"${sarasa_gothic_font_filename}" "${sarasa_gothic_font_url}"); then
+        print_echo "下载 更纱黑体 字体成功"
     else
-        print_error "下载"更纱黑体"字体失败"
+        print_error "下载 更纱黑体 字体失败"
     fi
     sleep 10
     # 解压字体
-    if (cd /tmp && 7z x /tmp/${sarasa_gothic_font_filename}); then
+    if (cd /tmp && 7z x /tmp/"${sarasa_gothic_font_filename}"); then
         print_echo "${sarasa_gothic_font_filename} 解压成功"
     else
         print_error "${sarasa_gothic_font_filename} 解压失败"
@@ -85,12 +85,12 @@ function install_font() {
     # 安装字体
     if (sudo cp /tmp/*.ttc /usr/share/fonts/); then
     sudo fc-cache -f -v
-        print_echo "安装"更纱黑体"字体 成功"
+        print_echo "安装 更纱黑体 字体 成功"
     else
-        print_error "安装"更纱黑体"字体 失败"
+        print_error "安装 更纱黑体 字体 失败"
     fi
     # 删除缓存文件
-    sudo rm -rf /tmp/$sarasa_gothic_font_filename
+    sudo rm -rf /tmp/"$sarasa_gothic_font_filename"
     sudo rm -rf /tmp/*.ttc
 }
 

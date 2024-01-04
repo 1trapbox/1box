@@ -1,6 +1,6 @@
 #! /bin/bash
 # 用于安装zsh以及配置zsh
-# 更新日期：2023-12-17
+# 更新日期：2024-1-14
 
 # ANSI 颜色代码
 font="\033[0m"
@@ -95,7 +95,7 @@ function install_ohmyzsh() {
 
 
 function re_zshrc() {
-    print_echo "正在重写".zshrc"配置文件..."
+    print_echo "正在重写 .zshrc 配置文件..."
     sleep 2
     local zshrc_config_file="$HOME/.zshrc"
     local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
@@ -128,7 +128,7 @@ function all_config() {
     print_echo "正在进行一些程序的配置"
     sleep 2
 
-    print_echo "正在创建"atuin"配置文件"
+    print_echo "正在创建 atuin配置文件"
     sleep 2
     local atuin_config_file="$HOME/.config/atuin/config.toml"
     local atuin_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/atuin/config.toml"
@@ -146,7 +146,7 @@ function all_config() {
     fi
     fi
     # starship
-    print_echo "正在创建"starship"配置文件..."
+    print_echo "正在创建 starship 配置文件..."
     sleep 2
     local starship_config_file="$HOME/.config/starship/my_starship.toml"
     local starship_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/starship/my_starship.toml"
