@@ -75,13 +75,7 @@ autoload -Uz _zinit
 # 一些程序
 zinit light zdharma-continuum/zinit-annex-binary-symlink        # 🌟依赖 zinit 附件二进制符号链接
 zinit load asdf-vm/asdf                                         # asdf版本管理器
-# asdf 安装的一些环境变量
-export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
-eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
-eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
-export GOPATH=$(go env GOPATH)                                  # GOPATH form go env
-export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
-export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
+
 
 ## 插件@zinit-annex-binary-symlink
 zinit from"gh-r" lbin"!eza" for @eza-community/eza              # 维护更勤快的exa
