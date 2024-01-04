@@ -3,7 +3,7 @@
 
 # 环境变量
 export ZSH="$HOME/.oh-my-zsh"                   # ohmyzsh安装路径
-export PATH="$PATH:/home/trapshell/.local/bin"  # pipx bin $PATH
+export PATH="$PATH:$HOME/.local/bin"            # pipx bin $PATH
 export GOPATH=$(go env GOPATH)                  # GOPATH form go env
 export GOROOT=$(go env GOROOT)                  # GOROOT form go env
 export PATH="$PATH:$GOPATH/bin"                 # GO BIN二进制
