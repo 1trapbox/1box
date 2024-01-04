@@ -25,6 +25,7 @@ alias hh="tr ':' '\n'"                          # 换行 拼音hh
 alias hist="atuin"                              # 列出历史记录的目录（默认：所有目录）
 alias fd="fd -H"                                # 更好的find -H显示隐藏文件
 alias cl="clear"                                # 洁癖
+alias clpath="typeset -U PATH"                  # 清理重复$PATH
 alias zshconfig="nano ~/.zshrc"                 # 打开zsh配置文件
 alias toptop="glances"                          # 系统管理器
 alias proxy4="proxychains4"                     # 代理
