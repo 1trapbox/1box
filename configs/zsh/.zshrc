@@ -3,6 +3,16 @@
 
 # 环境变量
 export ZSH="$HOME/.oh-my-zsh"                   # ohmyzsh安装路径
+export PATH="$PATH:/home/trapshell/.local/bin"  # pipx bin $PATH
+export GOPATH=$(go env GOPATH)                  # GOPATH form go env
+export GOROOT=$(go env GOROOT)                  # GOROOT form go env
+export PATH="$PATH:$GOPATH/bin"                 # GO BIN二进制
+
+. ~/.asdf/plugins/golang/set-env.zsh
+eval "$(register-python-argcomplete pipx)"      # pipx   shell自动补全
+eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"    # pipenv  shell自动补全
+
+
 # 服务器环境变量
 #. "/root/.acme.sh/acme.sh.env"                  # acme.sh环境变量
 
@@ -36,7 +46,7 @@ alias bz2='tar -xjvf'                           # bz2解压缩
 
 # alias设置 - exa
 alias ls='eza -ls --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                             # 显示文件
-alias la='eza -la --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                      # 显示所有文件，包括隐藏文件，显示目录下的文件(--tree) 包括隐藏文件
+alias la='eza -la --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                             # 显示所有文件，包括隐藏文件，显示目录下的文件(--tree) 包括隐藏文件
 alias ll='eza -la --icons --links --sort=type --git --time-style="+%Y/%m/%d %H:%M"'                     # 显示所有文件，包括隐藏文件，显示每个文件的硬链接
 alias lb='eza -la --icons -r - --sort=size --git --time-style="+%Y/%m/%d %H:%M"-iso'                    # 大小排列
 alias l.='eza -la --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M" -d .*'                       # 仅显示当前目录下的隐藏(.文件)
@@ -76,26 +86,28 @@ zinit light zdharma-continuum/zinit-annex-binary-symlink        # 🌟依赖 zin
 zinit load asdf-vm/asdf                                         # asdf版本管理器
 
 ## 插件@zinit-annex-binary-symlink
-zinit from"gh-r" lbin"eza" for @eza-community/eza               # 维护更勤快的exa
-zinit from"gh-r" lbin"bat" for @sharkdp/bat                     # 替代cat
-zinit from"gh-r" lbin"rg" for @BurntSushi/ripgrep               # rg
-zinit from"gh-r" lbin"fd" for @sharkdp/fd                       # fd
-zinit from"gh-r" lbin"!nvim" for @neovim/neovim                 # 使用nvim
+zinit from"gh-r" lbin"!eza" for @eza-community/eza               # 维护更勤快的exa
+zinit from"gh-r" lbin"!bat" for @sharkdp/bat                     # 替代cat
+zinit from"gh-r" lbin"!rg" for @BurntSushi/ripgrep               # rg
+zinit from"gh-r" lbin"!fd" for @sharkdp/fd                       # fd
+zinit from"gh-r" lbin"!nvim" for @neovim/neovim                  # 使用nvim
+zinit from"gh-r" lbin"!navi" for @denisidoro/navi                # navi 备忘录
+zinit from"gh-r" lbin"!fzf" for junegunn/fzf                     # fzf
 
 ### 插件@zinit-annex-binary-symlink 带参数的
-zinit from"gh-r" lbin for @atuinsh/atuin                        # atuin/shell的云同步历史记录
-eval "$(atuin init zsh)"                                        # atuin zsh小部件
+zinit from"gh-r" lbin"!atuin" for @atuinsh/atuin                 # atuin/shell的云同步历史记录
+eval "$(atuin init zsh)"                                         # atuin zsh小部件
 
-zinit from"gh-r" lbin"starship" for @starship/starship          # starship
-eval "$(starship init zsh)"                                     # starship 导入zsh
-export STARSHIP_CONFIG=$HOME/.config/starship/my_starship.toml  # starship 配置文件
+zinit from"gh-r" lbin"!starship" for @starship/starship          # starship
+eval "$(starship init zsh)"                                      # starship 导入zsh
+export STARSHIP_CONFIG=$HOME/.config/starship/my_starship.toml   # starship 配置文件
 
 # zsh一些插件
-zinit light zdharma-continuum/fast-syntax-highlighting          # zinit 语法高亮
-zinit light zsh-users/zsh-completions                           # zsh自动补全 其他补充
-zinit light marlonrichert/zsh-autocomplete                      # zsh实时自动补全
-zinit light jeffreytse/zsh-vi-mode                              # zsh更好的vi(vim)模式插件
-zinit light MichaelAquilina/zsh-you-should-use                  # zsh 你应该使用alias
+zinit light zdharma-continuum/fast-syntax-highlighting           # zinit 语法高亮
+zinit light zsh-users/zsh-completions                            # zsh自动补全 其他补充
+zinit light marlonrichert/zsh-autocomplete                       # zsh实时自动补全
+zinit light jeffreytse/zsh-vi-mode                               # zsh更好的vi(vim)模式插件
+zinit light MichaelAquilina/zsh-you-should-use                   # zsh 你应该使用alias
 #zinit light zsh-users/zsh-autosuggestions                       # zsh自动补全
 
 # zsh实时自动补全设置 @marlonrichert/zsh-autocomplete
