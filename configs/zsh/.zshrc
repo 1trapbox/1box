@@ -1,16 +1,8 @@
-## 全新zshrc
-## 更新时间: 2023-12-16
+## .zshrc
+## 更新时间: 2024-1-4
 
 # 环境变量
 export ZSH="$HOME/.oh-my-zsh"                   # ohmyzsh安装路径
-# 环境变量 form asdf
-export PATH="$PATH:$HOME/.local/bin"            # pipx bin $PATH
-export GOPATH=$(go env GOPATH)                  # GOPATH form go env
-export GOROOT=$(go env GOROOT)                  # GOROOT form go env
-export PATH="$PATH:$GOPATH/bin"                 # GO BIN二进制
-
-eval "$(register-python-argcomplete pipx)"      # pipx   shell自动补全
-eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"    # pipenv  shell自动补全
 
 # 服务器环境变量
 #. "/root/.acme.sh/acme.sh.env"                  # acme.sh环境变量
@@ -26,7 +18,6 @@ alias hh="tr ':' '\n'"                          # 换行 拼音hh
 alias hist="atuin"                              # 列出历史记录的目录（默认：所有目录）
 alias fd="fd -H"                                # 更好的find -H显示隐藏文件
 alias cl="clear"                                # 洁癖
-alias clpath="typeset -U PATH"                  # 清理重复$PATH
 alias zshconfig="nano ~/.zshrc"                 # 打开zsh配置文件
 alias toptop="glances"                          # 系统管理器
 alias proxy4="proxychains4"                     # 代理
@@ -59,8 +50,8 @@ alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'                    
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'                                    # 全局--help 使用bat输出
 
 # alias设置 - zinit
-alias upzi='zinit self-update'                                                                           # 更新zinit本身
-alias upziall='zinit update'                                                                             # 更新zinit安装的软件包
+alias zup='zinit self-update'                                                                           # 更新zinit本身
+alias zupall='zinit update'                                                                             # 更新zinit安装的软件包
 
 # oh-my-zsh 设置 取消=注释即可
 CASE_SENSITIVE="true"                           # 使用区分大小写的自动补全
@@ -84,6 +75,13 @@ autoload -Uz _zinit
 # 一些程序
 zinit light zdharma-continuum/zinit-annex-binary-symlink        # 🌟依赖 zinit 附件二进制符号链接
 zinit load asdf-vm/asdf                                         # asdf版本管理器
+# asdf 安装的一些环境变量
+export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
+eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
+eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
+export GOPATH=$(go env GOPATH)                                  # GOPATH form go env
+export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
+export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
 
 ## 插件@zinit-annex-binary-symlink
 zinit from"gh-r" lbin"!eza" for @eza-community/eza              # 维护更勤快的exa

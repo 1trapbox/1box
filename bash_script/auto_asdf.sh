@@ -31,7 +31,7 @@ function print_error() {
     # 重定向错误信息到日志文件 
     exec 2>> /tmp/error.txt
     # 记录当前函数名
-    echo "From function: ${FUNCNAME[1]}" >> /tmp/nginx_error.txt
+    echo "From function: ${FUNCNAME[1]}" >> error.txt
     # 样式
     error="${error_style}${bold}[ERROR]${font}"
     echo -e "${error}"
@@ -126,11 +126,18 @@ function install_all() {
     asdf global pipx latest
     print_echo "pipx(latest) 设置全局版本成功"
 
+    # pipx install argcomplete shell补全
+    if (pipx install argcomplete); then
+    print_ok "pipx安装argcomplete成功"
+    else
+    print_error "pipx安装argcomplete失败"
+    fi
+
     # pipx install pipenv
     if (pipx install pipenv); then
     print_ok "pipx安装pipenv成功"
     else
-    print_error "pipx安装pipenv成功"
+    print_error "pipx安装pipenv失败"
     fi
     
 
@@ -154,5 +161,34 @@ function install_all() {
     fi
 }
 
+function modify_zshrc() {
+    # 定义一些变量
+    zshrc_file="$HOME/.zshrc"
+    search_line="zinit load asdf-vm/asdf"
+    line_number=$(grep -n "$search_line" "$zshrc_file" | cut -d: -f1)
+    # 将内容存储在tmpfile
+    tmpfile=$(sudo mktemp)
+    sudo tee "$tmpfile" <<'EOF'
+# asdf 安装的一些环境变量
+export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
+eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
+eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
+export GOPATH=$(go env GOPATH)                                  # GOPATH form go env
+export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
+export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
+EOF
+
+
+    # 搜索匹配的行
+    if grep -q "$search_line" "$zshrc_file"; then
+    # 在匹配行的下一行插入内容
+        sudo sed -i "${line_number}r ${tmpfile}" "${zshrc_file}"
+        echo "修改 $zshrc_file 成功"
+    else
+        echo "修改 $zshrc_file 失败"
+    fi
+}
+
 depend
 install_all
+modify_zshrc
