@@ -4,10 +4,16 @@
 # WSL 内核: 6.1.21.2-microsoft-standard-WSL2+
 # 实验性设置当前版本可用, 不排除未来移至默认设置.
 
+# 默认配置
 [wsl2]
 kernel="E:\\WSL\\Kernel\\bzImage" # 自定义内核
-memory="16GB"                     # 默认为windows内存的50%
+memory=16GB                     # 默认为windows内存的50%
 
-[experimental]                    # 实验性的 pre-release
-autoMemoryReclaim="gradual"       # 检测到空闲CPU使用率后自动释放缓存内存 gradual=缓慢释放. dropcache=即时释放缓存
-sparseVhd="true"                  # 自动磁盘空间清理 vhdx
+# 实验性配置 pre-release
+[experimental]
+networkingMode=mirrored         # 网路模式 使用windows本机IP
+autoMemoryReclaim=gradual       # 检测到空闲CPU使用率后自动释放缓存内存 gradual=缓慢释放. dropcache=即时释放缓存
+sparseVhd=true                  # 自动磁盘空间清理 vhdx
+dnsTunneling=true               # 提高VPN和其他网络设置的兼容性 使用windows本身设置的DNS解析
+autoProxy=true                  # 使用 Windows 的 HTTP 代理信息
+firewall=true                   # 防火墙

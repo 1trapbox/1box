@@ -26,7 +26,7 @@ alias nginxconf="cd /opt/nginx/conf"            # nginx目录
 alias xrayconf="cd /usr/local/etc/xray/"        # xray配置文件目2录
 alias acme.sh=~/.acme.sh/acme.sh                # acme证书
 alias sourcezsh='source ~/.zshrc'               # 刷新zsh
-alias setproxy='export http_proxy=http://192.168.0.168:10809; export https_proxy=http://192.168.0.168:10809'
+alias setproxy='export http_proxy=http://127.0.0.1:10809; export https_proxy=http://127.0.0.1:10809'
 alias upzshrc='mv ~/.zshrc ~/.zshrc.bak && echo "备份.zshrc成功" && curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o ~/.zshrc && echo "更新.zshrc成功"'
 
 # alias设置 - 解压缩
