@@ -74,14 +74,16 @@ function install_all() {
     asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
     print_echo "添加nodejs插件成功"
     if (asdf install nodejs latest); then
-    node_version=$(node --version)
-    npm_version=$(npm --version)
-    print_ok "nodejs安装成功 \n node $node_version \n npm $npm_version"
+    print_ok "nodejs安装成功"
     else
     print_error "nodejs安装失败"
     fi
-    asdf global nodejs latest
-    print_echo "nodejs(latest) 设置全局版本成功"
+
+    if (asdf global nodejs latest); then
+    node_version=$(node --version)
+    npm_version=$(npm --version)
+    print_echo "nodejs(latest) 设置全局版本成功 \n node $node_version \n npm $npm_version"
+    fi
 
 
     # java
@@ -89,40 +91,46 @@ function install_all() {
     asdf plugin-add java https://github.com/halcyon/asdf-java.git
     print_echo "添加java插件成功"
     if (asdf install java oracle-graalvm-21.0.1); then
-    java_version=$(java --version | rg java)
-    print_ok "oracle-graalvm(java)安装成功 \n $java_version"
+    print_ok "oracle-graalvm(java)安装成功"
     else
     print_error "oracle-graalvm(java)安装失败"
     fi
-    asdf global java oracle-graalvm-21.0.1
-    print_echo "oracle-graalvm(java)设置全局版本成功"
+
+    if (asdf global java oracle-graalvm-21.0.1); then
+    java_version=$(java --version | rg java)
+    print_echo "oracle-graalvm(java)设置全局版本成功 \n $java_version"
+    fi
 
     # python
     print_echo "正在安装python"
     asdf plugin-add python
     print_echo "添加python插件成功"
     if (asdf install python latest); then
-    python_version=$(python --version)
-    pip_version=$(pip --version)
-    print_ok "python安装成功 \n $python_version \n $pip_version"
+    print_ok "python安装成功"
     else
     print_error "python安装失败"
     fi
-    asdf global python latest
-    print_echo "python(latest) 设置全局版本成功"
+
+    if (asdf global python latest); then
+    python_version=$(python --version)
+    pip_version=$(pip --version)
+    print_echo "python(latest) 设置全局版本成功 \n $python_version \n $pip_version"
+    fi
 
     # pipx
     print_echo "正在安装pipx"
     asdf plugin add pipx
     print_echo "添加pipx插件成功"
     if (asdf install pipx latest); then
-    pipx_version=$(pipx --version)
-    print_ok "pipx安装成功 \n pipx $pipx_version"
+    print_ok "pipx安装成功"
     else
     print_error "python安装失败"
     fi
-    asdf global pipx latest
-    print_echo "pipx(latest) 设置全局版本成功"
+
+    if (asdf global pipx latest); then
+    pipx_version=$(pipx --version)
+    print_echo "pipx(latest) 设置全局版本成功 \n pipx $pipx_version"
+    fi
 
     # pipx install argcomplete shell补全
     if (pipx install argcomplete); then
@@ -144,13 +152,15 @@ function install_all() {
     asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
     print_echo "添加go插件成功"
     if (asdf install golang latest); then
-    go_version=$(go version)
-    print_ok "go安装成功 \n $go_version"
+    print_ok "go安装成功"
     else
     print_error "go安装失败"
     fi
-    asdf global golang latest
-    print_echo "go(latest) 设置全局版本成功"
+
+    if (asdf global golang latest); then
+    go_version=$(go version)
+    print_echo "go(latest) 设置全局版本成功 \n $go_version"
+    fi
 
     # go GO111MODULE=auto
     if (go env -w GO111MODULE=auto);then
