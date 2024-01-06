@@ -11,14 +11,6 @@ yellow="\033[33m"
 error_style="\033[37;41m"
 ok_style="\033[37;42m"
 
-# version
-node_version=$(node --version)
-npm_version=$(npm --version)
-java_version=$(java --version | rg java)
-python_version=$(python --version)
-pipx_version=$(pipx --version)
-pip_version=$(pip --version)
-go_version=$(go version)
 # 简单的输出
 function print_ok() {
     ok="${ok_style}${bold}[OK]${font}"
@@ -82,6 +74,8 @@ function install_all() {
     asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
     print_echo "添加nodejs插件成功"
     if (asdf install nodejs latest); then
+    node_version=$(node --version)
+    npm_version=$(npm --version)
     print_ok "nodejs安装成功 \n node $node_version \n npm $npm_version"
     else
     print_error "nodejs安装失败"
@@ -95,6 +89,7 @@ function install_all() {
     asdf plugin-add java https://github.com/halcyon/asdf-java.git
     print_echo "添加java插件成功"
     if (asdf install java oracle-graalvm-21.0.1); then
+    java_version=$(java --version | rg java)
     print_ok "oracle-graalvm(java)安装成功 \n $java_version"
     else
     print_error "oracle-graalvm(java)安装失败"
@@ -107,6 +102,8 @@ function install_all() {
     asdf plugin-add python
     print_echo "添加python插件成功"
     if (asdf install python latest); then
+    python_version=$(python --version)
+    pip_version=$(pip --version)
     print_ok "python安装成功 \n $python_version \n $pip_version"
     else
     print_error "python安装失败"
@@ -119,6 +116,7 @@ function install_all() {
     asdf plugin add pipx
     print_echo "添加pipx插件成功"
     if (asdf install pipx latest); then
+    pipx_version=$(pipx --version)
     print_ok "pipx安装成功 \n pipx $pipx_version"
     else
     print_error "python安装失败"
@@ -146,6 +144,7 @@ function install_all() {
     asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
     print_echo "添加go插件成功"
     if (asdf install golang latest); then
+    go_version=$(go version)
     print_ok "go安装成功 \n $go_version"
     else
     print_error "go安装失败"
