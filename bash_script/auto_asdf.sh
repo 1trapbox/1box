@@ -12,13 +12,13 @@ error_style="\033[37;41m"
 ok_style="\033[37;42m"
 
 # version
-node_version="$(node --version)"
-npm_version="$(npm --version)"
-java_version="$(java --version | rg java)"
-python_version="$(python --version)"
-pipx_version="$(pipx --version)"
-pip_version="$(pip --version)"
-go_version="$(go version)"
+node_version=$(node --version)
+npm_version=$(npm --version)
+java_version=$(java --version | rg java)
+python_version=$(python --version)
+pipx_version=$(pipx --version)
+pip_version=$(pip --version)
+go_version=$(go version)
 # 简单的输出
 function print_ok() {
     ok="${ok_style}${bold}[OK]${font}"
