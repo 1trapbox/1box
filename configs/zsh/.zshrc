@@ -1,5 +1,5 @@
 ## .zshrc
-## 更新时间: 2024-1-4
+## 更新时间: 2024-1-7
 
 # 环境变量
 export ZSH="$HOME/.oh-my-zsh"                   # ohmyzsh安装路径
@@ -27,7 +27,7 @@ alias xrayconf="cd /usr/local/etc/xray/"        # xray配置文件目2录
 alias acme.sh=~/.acme.sh/acme.sh                # acme证书
 alias sourcezsh='source ~/.zshrc'               # 刷新zsh
 alias setproxy='export http_proxy=http://127.0.0.1:10809; export https_proxy=http://127.0.0.1:10809'
-alias upzshrc='mv ~/.zshrc ~/.zshrc.bak && echo "备份.zshrc成功" && curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o ~/.zshrc && echo "更新.zshrc成功"'
+alias zshrcup='mv ~/.zshrc ~/.zshrc.bak && echo "备份.zshrc成功" && curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o ~/.zshrc && echo "更新.zshrc成功"'
 
 # alias设置 - 解压缩
 alias gz='tar -xzvf'                            # gz解压缩
@@ -50,8 +50,8 @@ alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'                    
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'                                    # 全局--help 使用bat输出
 
 # alias设置 - zinit
-alias upz='zinit self-update'                                                                           # 更新zinit本身
-alias upzall='zinit update'                                                                             # 更新zinit安装的软件包
+alias zup='zinit self-update'                                                                           # 更新zinit本身
+alias zupall='zinit update'                                                                             # 更新zinit安装的软件包
 
 # oh-my-zsh 设置 取消=注释即可
 CASE_SENSITIVE="true"                           # 使用区分大小写的自动补全
@@ -76,8 +76,15 @@ autoload -Uz _zinit
 zinit light zdharma-continuum/zinit-annex-binary-symlink        # 🌟依赖 zinit 附件二进制符号链接
 zinit load asdf-vm/asdf                                         # asdf版本管理器
 
+# asdf 安装的一些环境变量
+export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
+eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
+eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
+export GOPATH=$(go env GOPATH)                                  # GOPATH form go env
+export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
+export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
 
-## 插件@zinit-annex-binary-symlink
+# 插件@zinit-annex-binary-symlink
 zinit from"gh-r" lbin"!eza" for @eza-community/eza              # 维护更勤快的exa
 zinit from"gh-r" lbin"!bat" for @sharkdp/bat                    # 替代cat
 zinit from"gh-r" lbin"!rg" for @BurntSushi/ripgrep              # rg
@@ -85,14 +92,21 @@ zinit from"gh-r" lbin"!fd" for @sharkdp/fd                      # fd
 zinit from"gh-r" lbin"!nvim" for @neovim/neovim                 # 使用nvim
 zinit from"gh-r" lbin"!navi" for @denisidoro/navi               # navi 备忘录
 zinit from"gh-r" lbin"!fzf" for junegunn/fzf                    # fzf
+zinit from"gh-r" lbin"!glow" for charmbracelet/glow             # 在 CLI 上渲染 Markdown
 
-### 插件@zinit-annex-binary-symlink 带参数的
+# 插件@zinit-annex-binary-symlink 带参数的
 zinit from"gh-r" lbin"!atuin" for @atuinsh/atuin                # atuin/shell的云同步历史记录
 eval "$(atuin init zsh)"                                        # atuin zsh小部件
 
 zinit from"gh-r" lbin"!starship" for @starship/starship         # starship
 eval "$(starship init zsh)"                                     # starship 导入zsh
 export STARSHIP_CONFIG=$HOME/.config/starship/my_starship.toml  # starship 配置文件
+
+# 一些ice
+zinit ice as"command" pick"xdg-ninja.sh"                        # xdg忍者 检查 $HOME 中是否有不需要的文件和目录
+zinit load b3nj5m1n/xdg-ninja                                   # xdg忍者
+alias xdgnj=xdg-ninja.sh                                        # xdg忍者 lias
+export XDG_STATE_HOME="$HOME/.local/state"                      # xdg忍者 PATH
 
 # zsh一些插件
 zinit light zdharma-continuum/fast-syntax-highlighting          # zinit 语法高亮
