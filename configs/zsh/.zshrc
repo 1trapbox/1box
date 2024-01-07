@@ -84,6 +84,7 @@ export GOPATH=$(go env GOPATH)                                  # GOPATH form go
 export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
 export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
 
+
 # 插件@zinit-annex-binary-symlink
 zinit from"gh-r" lbin"!eza" for @eza-community/eza              # 维护更勤快的exa
 zinit from"gh-r" lbin"!bat" for @sharkdp/bat                    # 替代cat
