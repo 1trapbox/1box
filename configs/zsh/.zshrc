@@ -80,9 +80,9 @@ zinit load asdf-vm/asdf                                         # asdf版本管�
 export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
 eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
 eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
-export GOPATH=$(go env GOPATH)                                  # GOPATH form go env
-export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
-export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
+#export GOPATH=$(go env GOPATH)                                  # GOPATH form go env
+#export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
+#export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
 
 
 # 插件@zinit-annex-binary-symlink
@@ -98,25 +98,39 @@ zinit from"gh-r" lbin"!glow" for charmbracelet/glow             # 在 CLI 上渲
 # 插件@zinit-annex-binary-symlink 带参数的
 zinit from"gh-r" lbin"!atuin" for @atuinsh/atuin                # atuin/shell的云同步历史记录
 eval "$(atuin init zsh)"                                        # atuin zsh小部件
+bindkey '^r' _atuin_search_widget                               # ctrl+r 快捷键
 
 zinit from"gh-r" lbin"!starship" for @starship/starship         # starship
 eval "$(starship init zsh)"                                     # starship 导入zsh
 export STARSHIP_CONFIG=$HOME/.config/starship/my_starship.toml  # starship 配置文件
 
 # 一些ice
-zinit ice as"command" pick"xdg-ninja.sh"                        # xdg忍者 检查 $HOME 中是否有不需要的文件和目录
-zinit load b3nj5m1n/xdg-ninja                                   # xdg忍者
-alias xdgnj=xdg-ninja.sh                                        # xdg忍者 lias
-export XDG_STATE_HOME="$HOME/.local/state"                      # xdg忍者 PATH
+#zinit ice as"command" pick"xdg-ninja.sh"                        # xdg忍者 检查 $HOME 中是否有不需要的文件和目录
+#zinit load b3nj5m1n/xdg-ninja                                   # xdg忍者
+#alias xdgnj=xdg-ninja.sh                                        # xdg忍者 lias
+#export XDG_STATE_HOME="$HOME/.local/state"                      # xdg忍者 PATH
 
-# zsh一些插件
+# zsh实时自动补全设置 @marlonrichert/zsh-autocomplete
+zinit light marlonrichert/zsh-autocomplete                      # zsh实时自动补全
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+() {
+    local -a prefix=( '\e'{\[,O} )
+    local -a up=( ${^prefix}A ) down=( ${^prefix}B )
+    local key=
+    for key in $up[@]; do
+        bindkey "$key" _atuin_search_widget
+    done
+    for key in $down[@]; do
+        bindkey "$key" _atuin_search_widget
+    done
+}
+
+# 一些light插件
 zinit light zdharma-continuum/fast-syntax-highlighting          # zinit 语法高亮
 zinit light zsh-users/zsh-completions                           # zsh自动补全 其他补充
-zinit light marlonrichert/zsh-autocomplete                      # zsh实时自动补全
 zinit light jeffreytse/zsh-vi-mode                              # zsh更好的vi(vim)模式插件
 zinit light MichaelAquilina/zsh-you-should-use                  # zsh 你应该使用alias
 #zinit light zsh-users/zsh-autosuggestions                       # zsh自动补全
-
-# zsh实时自动补全设置 @marlonrichert/zsh-autocomplete
-bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
