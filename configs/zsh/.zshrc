@@ -112,10 +112,11 @@ export STARSHIP_CONFIG=$HOME/.config/starship/my_starship.toml  # starship 配�
 
 # zsh实时自动补全设置 @marlonrichert/zsh-autocomplete
 zinit light marlonrichert/zsh-autocomplete                      # zsh实时自动补全
-zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
-zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+#zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+#zstyle ':autocomplete:*history*:*' insert-unambiguous yes
 bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+
 () {
     local -a prefix=( '\e'{\[,O} )
     local -a up=( ${^prefix}A ) down=( ${^prefix}B )
@@ -123,9 +124,9 @@ bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
     for key in $up[@]; do
         bindkey "$key" _atuin_search_widget
     done
-    for key in $down[@]; do
-        bindkey "$key" _atuin_search_widget
-    done
+#    for key in $down[@]; do
+#        bindkey "$key" _atuin_search_widget
+#    done
 }
 
 # 一些light插件
