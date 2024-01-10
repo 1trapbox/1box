@@ -15,7 +15,7 @@ alias neofetch="neofetch"                               # neofetch系统信息
 alias nginxconf="cd /opt/nginx/conf"                    # nginx目录
 alias xrayconf="cd /usr/local/etc/xray/"                # xray配置文件目2录
 alias acme.sh=~/.acme.sh/acme.sh                        # acme证书
-alias sourcezsh='source ~/.zshrc'                       # 刷新zsh
+alias sourcezsh="source $XDG_CONFIG_HOME/zsh/.zshrc"    # 刷新zsh
 alias setproxy='export http_proxy=http://127.0.0.1:10809; export https_proxy=http://127.0.0.1:10809'
 alias zshrcup="cp $XDG_CONFIG_HOME/zsh/.zshrc $XDG_CONFIG_HOME/zsh/.zshrc && echo "备份.zshrc成功" && curl -sL https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o $XDG_CONFIG_HOME/zsh/.zshrc && "echo 更新.zshrc成功" "
 
