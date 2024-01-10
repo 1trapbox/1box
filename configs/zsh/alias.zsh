@@ -20,10 +20,10 @@ alias setproxy='export http_proxy=http://127.0.0.1:10809; export https_proxy=htt
 alias zshrcup="cp $XDG_CONFIG_HOME/zsh/.zshrc $XDG_CONFIG_HOME/zsh/.zshrc && echo "备份.zshrc成功" && curl -sL https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o $XDG_CONFIG_HOME/zsh/.zshrc && "echo 更新.zshrc成功" "
 
 # alias设置 - 解压缩
-alias gz='tar -xzvf'                            # gz解压缩
-alias tar='tar -xzvf'                           # tar解压缩
-alias zip='unzip'                               # zip解压缩
-alias bz2='tar -xjvf'                           # bz2解压缩
+alias gz='tar -xzvf'                                    # gz解压缩
+alias tar='tar -xzvf'                                   # tar解压缩
+alias zip='unzip'                                       # zip解压缩
+alias bz2='tar -xjvf'                                   # bz2解压缩
 
 # alias设置 - exa
 alias ls='eza -ls --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M"'              # 显示文件
@@ -35,10 +35,10 @@ alias ld='eza -la --icons --sort=type --git --time-style="+%Y/%m/%d %H:%M" -D'  
 
 # alias设置 - bat
 alias bat="bat --paging=never"
-alias cat="bat --paging=never"                                                            # bat替代cat
-alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'                              # 全局-h 使用bat输出
-alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'                      # 全局--help 使用bat输出
+alias cat="bat --paging=never"                                                           # bat替代cat
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'                             # 全局-h 使用bat输出
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'                     # 全局--help 使用bat输出
 
 # alias设置 - zinit
-alias ziup='zinit self-update'                                                             # 更新zinit本身
-alias ziupall='zinit update'                                                               # 更新zinit安装的软件包
+alias ziup='zinit self-update'                                                           # 更新zinit本身
+alias ziupall='zinit update'                                                             # 更新zinit安装的软件包
