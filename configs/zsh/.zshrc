@@ -2,7 +2,6 @@
 ## 更新时间: 2024-1-10
 
 # 环境变量
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"           # zsh指定配置文件目录
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"           # ohmyzsh安装路径
 # 环境变量 - XDG目录规范
 export XDG_CONFIG_HOME="$HOME/.config"          # 用户 特定配置的目录（类似于 /etc）
@@ -11,9 +10,11 @@ export XDG_DATA_HOME="$HOME/.local/share"       # 用户 特定数据文件的�
 export XDG_STATE_HOME="$HOME/.local/state"      # 用户 特定状态文件应写入的位置（类似于 /var/lib）
 export XDG_DATA_DIRS="/usr/local/share"         # 全局 存储数据文件
 export XDG_CONFIG_DIRS="/etc/xdg"               # 全局 默认配置文件
+#export ZDOTDIR="$XDG_CONFIG_HOME/zsh"          # zsh指定配置文件目录 (放至.zshenv)
 
 # alias
 source $XDG_CONFIG_HOME/zsh/alias.zsh           # alias路径
+
 # oh-my-zsh //设置 取消=注释即可
 CASE_SENSITIVE="true"                           # 使用区分大小写的自动补全
 HYPHEN_INSENSITIVE="true"                       # 使用不区分连字符的自动补全
