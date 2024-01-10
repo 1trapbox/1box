@@ -182,9 +182,9 @@ function modify_zshrc() {
 export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
 eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
 eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
-export GOPATH=$(go env GOPATH)                                  # GOPATH form go env
-export GOROOT=$(go env GOROOT)                                  # GOROOT form go env
-#export PATH="$PATH:$GOPATH/bin"                                 # GO BIN二进制
+#export GOPATH=$(go env GOPATH)                                 # GOPATH form go env
+#export GOROOT=$(go env GOROOT)                                 # GOROOT form go env
+#export PATH="$PATH:$GOPATH/bin"                                # GO BIN二进制
 EOF
 
 
