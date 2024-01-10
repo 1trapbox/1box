@@ -99,12 +99,6 @@ function install_ohmyzsh() {
         print_error "ohmyzsh 安装失败"
     fi
 
-    if (rm "$HOME"/.zshrc); then
-        print_ok "删除默认.zshrc成功 \n 路径=$HOME/.zshrc"
-    else
-        print_error "删除默认.zshrc失败 或 文件不存在 \n 请手动检查 路径=$HOME/.zshrc"
-    fi
-
     print_echo "正在将zsh设置为默认shell..."
     if (chsh -s $(which zsh)); then
         print_ok "设置zsh为默认shell 成功"
@@ -206,5 +200,5 @@ install_packages
 install_ohmyzsh
 all_config
 re_zshrc
-install_zinit
 bash_xdg
+install_zinit
