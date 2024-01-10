@@ -87,6 +87,12 @@ function install_ohmyzsh() {
     export XDG_DATA_HOME="$HOME/.local/share"
     export ZSH="$XDG_DATA_HOME/oh-my-zsh"
 
+    if (rm "$HOME"/.zshrc); then
+        print_ok "删除默认.zshrc成功 \n 路径=$HOME/.zshrc"
+    else
+        print_error "删除默认.zshrc失败 或 文件不存在 \n 请手动检查 路径=$HOME/.zshrc"
+    fi
+
     if (yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"); then
         print_ok "ohmyzsh 安装成功 \n 路径=$XDG_DATA_HOME/oh-my-zsh"
     else
@@ -98,12 +104,6 @@ function install_ohmyzsh() {
         print_ok "设置zsh为默认shell 成功"
     else
         print_error "设置zsh为默认shell 失败"
-    fi
-
-    if (rm $HOME/.zshrc); then
-        print_ok "删除默认.zshrc成功 \n 路径=$HOME/.zshrc"
-    else
-        print_error "删除默认.zshrc失败 或 文件不存在 \n 请手动检查 路径=$HOME/.zshrc"
     fi
 }
 
