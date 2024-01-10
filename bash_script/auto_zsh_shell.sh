@@ -1,16 +1,23 @@
 #! /bin/bash
 # 用于安装zsh以及配置zsh
-# 更新日期：2024-1-14
+# 更新日期：2024-1-10
 
 # ANSI 颜色代码
-font="\033[0m"
-bold="\033[1m"
 green="\033[32m"
 red="\033[31m"
 yellow="\033[33m"
+font="\033[0m"
+bold="\033[1m"
 error_style="\033[37;41m"
 ok_style="\033[37;42m"
 
+# XDG 目录规范
+XDG_CONFIG_HOME="$HOME/.config"
+XDG_CACHE_HOME="$HOME/.cache"
+XDG_DATA_HOME="$HOME/.local/share"
+XDG_STATE_HOME="$HOME/.local/state"
+XDG_DATA_DIRS="/usr/local/share"
+XDG_CONFIG_DIRS="/etc/xdg"
 
 # 简单的输出
 function print_ok() {
@@ -36,7 +43,7 @@ function print_error() {
 
 function print_echo() {
     echo -e "${yellow}${bold}$1${font}\n"
-    
+    sleep 3
 }
 
 # 更新系统/包
@@ -56,17 +63,15 @@ function install_packages() {
         wget wget\n
         git git\n
         unzip unzip解压缩\n
-        neofetch 系统信息\n
         fonts-firacode fira编程字体\n
         "
-    sleep 2
+
     if (sudo apt install -y \
         curl \
         wget \
         git \
         zsh \
         unzip \
-        neofetch \
         fonts-firacode \
         ); then
         print_ok "软件包 安装成功"
@@ -77,46 +82,61 @@ function install_packages() {
 
 function install_ohmyzsh() {
     print_echo "正在安装ohmyzsh..."
-    sleep 2
+
+    # 设置XDG目录规范
+    export XDG_DATA_HOME="$HOME/.local/share"
+    export ZSH="$XDG_DATA_HOME/oh-my-zsh"
+
     if (yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"); then
-        print_ok "ohmyzsh 安装成功"
+        print_ok "ohmyzsh 安装成功 \n 路径=$XDG_DATA_HOME/oh-my-zsh"
     else
         print_error "ohmyzsh 安装失败"
     fi
 
     print_echo "正在将zsh设置为默认shell..."
-    sleep 2
     if (chsh -s $(which zsh)); then
         print_ok "设置zsh为默认shell 成功"
     else
         print_error "设置zsh为默认shell 失败"
+    fi
+
+    if (rm $HOME/.zshrc); then
+        print_ok "删除默认.zshrc成功 \n 路径=$HOME/.zshrc"
+    else
+        print_error "删除默认.zshrc失败 或 文件不存在 \n 请手动检查 路径=$HOME/.zshrc"
     fi
 }
 
 
 function re_zshrc() {
     print_echo "正在重写 .zshrc 配置文件..."
-    sleep 2
-    local zshrc_config_file="$HOME/.zshrc"
+    # XDG目录规范
+    local zsh_config_dir="$XDG_CONFIG_HOME/zsh"
+    local zshrc_config_file="$XDG_CONFIG_HOME/zsh/.zshrc"
     local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
-    if [ -e "$zshrc_config_file" ]; then
-        # 如果文件存在，则重写所有内容
-        curl -s "$zshrc_config_file_url" > "$zshrc_config_file"
-        print_ok "zshrc 配置文件已重写成功\n 路径=$zshrc_config_file"
-    else
-        # 如果文件不存在，则创建并写入内容
-        touch "$HOME/.zshrc"
-    if (curl -s "$zshrc_config_file_url" > "$zshrc_config_file"); then
-        print_ok "配置文件创建并重写成功\n 路径=$zshrc_config_file"
-    else
-        print_error "$zshrc_config_file 重写失败"
-    fi
+    local zshrc_alias_file="$XDG_CONFIG_HOME/zsh/alias.zsh"
+    local zshrc_alias_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/alias.zsh"
+
+    # 目录不存在则创建
+    if [ ! -d "$zsh_config_dir" ]; then
+        mkdir -p "$zsh_config_dir"
     fi
 
+    if (curl -sl "$zshrc_config_file_url" -o "$zshrc_config_file"); then
+        print_ok ".zshrc 配置文件下载成功 \n 路径=$zshrc_config_file"
+        else
+        print_error ".zshrc 配置文件下载失败"
+    fi
+
+    if (curl -sl "$zshrc_alias_file_url" -o "$zshrc_alias_file"); then
+        print_ok "alias.zsh 配置文件下载成功 \n 路径=$zshrc_alias_file"
+        else
+        print_error "alias.zsh 配置文件下载失败"
+    fi
 }
 
 function install_zinit() {
-    if (zsh -c "source ~/.zshrc"); then
+    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
     print_echo "zinit安装成功"
     else
     print_error "zinit安装失败"
@@ -125,43 +145,39 @@ function install_zinit() {
 }
 
 function all_config() {
-    print_echo "正在进行一些程序的配置"
-    sleep 2
-
+    print_echo "正在进行一些程序的配置..."
     print_echo "正在创建 atuin配置文件"
-    sleep 2
-    local atuin_config_file="$HOME/.config/atuin/config.toml"
+    # XDG 目录规范
+    local atuin_config_dir="$XDG_CONFIG_HOME/atuin"
+    local atuin_config_file="$XDG_CONFIG_HOME/atuin/config.toml"
     local atuin_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/atuin/config.toml"
-    if [ -e "$atuin_config_file" ]; then
-        # 如果文件存在，则重写所有内容
-        curl -s "$atuin_config_file_url" > "$atuin_config_file"
-        print_ok "atuin 配置文件已重写成功\n 路径=$atuin_config_file"
-    else
-        # 如果文件不存在，则创建并写入内容
-        mkdir -p "$HOME/.config/atuin"
-    if (curl -s "$atuin_config_file_url" > "$atuin_config_file") ;then
-        print_ok "atuin 配置文件创建并重写成功\n 路径=$atuin_config_file"
+    # 目录不存在则创建
+    if [ ! -d "$atuin_config_dir" ]; then
+        mkdir -p "$atuin_config_dir"
+    fi
+
+    if (curl -sl "$atuin_config_file_url" > "$atuin_config_file"); then
+        print_ok "atuin 配置文件下载成功\n 路径=$atuin_config_file"
     else
         print_error "$atuin_config_file 重写失败"
     fi
-    fi
+
     # starship
     print_echo "正在创建 starship 配置文件..."
-    sleep 2
-    local starship_config_file="$HOME/.config/starship/my_starship.toml"
+    # XDG 目录规范
+    local starship_config_dir="$XDG_CONFIG_HOME/starship"
+    local starship_config_file="$XDG_CONFIG_HOME/starship/my_starship.toml"
     local starship_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/starship/my_starship.toml"
-    if [ -e "$starship_config_file" ]; then
-        # 如果文件存在，则重写所有内容
-        curl -s "$starship_config_file_url" > "$starship_config_file"
-        print_ok "starship 配置文件已重写成功\n 路径=$starship_config_file"
-    else
-        # 如果文件不存在，则创建并写入内容
-        mkdir -p "$HOME/.config/starship"
-    if (curl -s "$starship_config_file_url" > "$starship_config_file") ;then
-        print_ok "starship 配置文件创建并重写成功\n 路径=$starship_config_file"
-    else
-        print_error "$starship_config_file 重写失败"
+
+    # 目录不存在则创建
+    if [ ! -d "$starship_config_dir" ]; then
+        mkdir -p "$starship_config_dir"
     fi
+
+    if (curl -sl "$starship_config_file_url" -o "$starship_config_file"); then
+        print_ok "starship 配置文件下载成功\n 路径=$starship_config_file"
+    else
+        print_error "$starship_config_file 配置文件下载失败"
     fi
 }
 
