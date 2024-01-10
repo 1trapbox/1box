@@ -188,7 +188,7 @@ function bash_xdg() {
         mkdir -p "$bash_xdg_dir"
     fi
 
-    if (mv $HOME/.bash* $bash_xdg_dir); then
+    if (mv "$HOME"/.bash* "$bash_xdg_dir"); then
     print_ok "成功 移动$HOME/.bash*所有点文件至XDG目录规范 \n 路径=$bash_xdg_dir"
     else
     print_error "失败 移动$HOME/.bash*所有点文件至XDG目录规范 \n 路径=$bash_xdg_dir"
