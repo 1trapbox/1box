@@ -181,9 +181,24 @@ function all_config() {
     fi
 }
 
+function bash_xdg() {
+    print_echo "正在将bash默认 '.文件' 移动到XDG目录规范"
+    local bash_xdg_dir="$XDG_CONFIG_HOME/bash"
+    if [ ! -d "$bash_xdg_dir" ]; then
+        mkdir -p "$bash_xdg_dir"
+    fi
+
+    if (mv $HOME/.bash* $bash_xdg_dir); then
+    print_ok "成功 移动$HOME/.bash*所有点文件至XDG目录规范 \n 路径=$bash_xdg_dir"
+    else
+    print_error "失败 移动$HOME/.bash*所有点文件至XDG目录规范 \n 路径=$bash_xdg_dir"
+    fi
+}
+
 update_system
 install_packages
 install_ohmyzsh
 all_config
 re_zshrc
 install_zinit
+bash_xdg
