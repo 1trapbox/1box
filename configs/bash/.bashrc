@@ -55,7 +55,5 @@ source "$OSH"/oh-my-bash.sh"
 #export LANG=en_US.UTF-8
 #export LC_ALL=en_US.UTF-8
 
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
