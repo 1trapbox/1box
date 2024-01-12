@@ -181,23 +181,7 @@ function all_config() {
     fi
 }
 
-function xdg_set() {
-    print_echo "正在将bash默认 '.文件' 移动到XDG目录规范"
-    local bash_xdg_dir="$XDG_CONFIG_HOME/bash"
-    if [ ! -d "$bash_xdg_dir" ]; then
-        mkdir -p "$bash_xdg_dir"
-    fi
-
-    if (
-        rm "$HOME"/.bashrc "$bash_xdg_dir"
-        rm "$HOME"/.bash_history "$bash_xdg_dir"
-        rm "$HOME"/.bash_logout "$bash_xdg_dir"
-        ); then
-    print_ok "成功 移动$HOME/.bash所有点文件至XDG目录规范 \n 路径=$bash_xdg_dir"
-    else
-    print_error "失败 移动$HOME/.bash所有点文件至XDG目录规范 \n 路径=$bash_xdg_dir"
-    fi
-
+function set_zshenv() {
     # zsh无法正确启动XDG规范目录的.zshrc
     # 参考某国内大佬 https://blog.quarticcat.com/zh/posts/how-do-i-make-my-zsh-smooth-as-fuck/
     # 某stackoverflow https://stackoverflow.com/questions/21162988/how-to-make-zsh-search-configuration-in-xdg-config-home
@@ -237,5 +221,5 @@ install_packages
 install_ohmyzsh
 all_config
 re_zshrc
-xdg_set
+set_zshenv
 install_zinit
