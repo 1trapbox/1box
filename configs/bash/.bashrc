@@ -1,6 +1,3 @@
-# Path to your oh-my-bash installation.
-export OSH='/home/trapshell/.config/bash/oh-my-bash'
-
 # 环境变量 - XDG目录规范
 export XDG_CONFIG_HOME="$HOME/.config"          # 用户 特定配置的目录（类似于 /etc）
 export XDG_CACHE_HOME="$HOME/.cache"            # 用户 指定的非必要（缓存）数据的写入位置（类似于 /var/cache）
@@ -9,6 +6,10 @@ export XDG_STATE_HOME="$HOME/.local/state"      # 用户 特定状态文件应�
 export XDG_DATA_DIRS="/usr/local/share"         # 全局 存储数据文件
 export XDG_CONFIG_DIRS="/etc/xdg"               # 全局 默认配置文件
 
+# Path to your oh-my-bash installation.
+export OSH="$XDG_DATA_HOME/oh-my-bash"
+
+# 历史记录保存路径
 export HISTFILE=$XDG_CONFIG_HOME/bash/history
 
 # 主题
