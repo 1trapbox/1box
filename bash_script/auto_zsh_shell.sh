@@ -189,9 +189,9 @@ function xdg_set() {
     fi
 
     if (
-        mv "$HOME"/.bashrc "$bash_xdg_dir"
-        mv "$HOME"/.bash_history "$bash_xdg_dir"
-        mv "$HOME"/.bash_logout "$bash_xdg_dir"
+        rm "$HOME"/.bashrc "$bash_xdg_dir"
+        rm "$HOME"/.bash_history "$bash_xdg_dir"
+        rm "$HOME"/.bash_logout "$bash_xdg_dir"
         ); then
     print_ok "成功 移动$HOME/.bash所有点文件至XDG目录规范 \n 路径=$bash_xdg_dir"
     else
