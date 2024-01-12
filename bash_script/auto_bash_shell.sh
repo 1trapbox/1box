@@ -59,7 +59,7 @@ function bash_xdg() {
     local bash_dot_files=$(find "$HOME" -maxdepth 1 -type f -name '.bash*')
 
     # 删除$HOME目录所有.bash开头点文件
-    if (rm -v "$bash_dot_files"); then
+    if (echo "$bash_dot_files" | xargs -d '\n' rm -v); then
     print_ok "$删除成功 所有$HOME/目录下所有.bash开头文件 \n 文件列表= \n $bash_dot_files"
     else
     print_error "$删除失败 所有$HOME/目录下所有.bash开头文件 \n 文件列表= \n $bash_dot_files"
