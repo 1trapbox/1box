@@ -8,6 +8,12 @@ curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_
 curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_zsh_shell.sh > auto_zsh_shell.sh && chmod +x auto_zsh_shell.sh && bash auto_zsh_shell.sh
 ```
 ---
+### 安装配置bash (Node\Python\Java\Go)
+```
+curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_asdf.sh | bash
+
+```
+---
 ### 安装配置asdf (Node\Python\Java\Go)
 ```
 curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_asdf.sh | bash
