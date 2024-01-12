@@ -56,7 +56,8 @@ function bash_xdg() {
     local XDG_CONFIG_HOME="$HOME/.config"
     local bash_xdg_dir="$XDG_CONFIG_HOME/bash"
     local bashrc_config="$HOME/.bashrc"
-    local bash_dot_files=$(find "$HOME" -maxdepth 1 -type f -name '.bash*')
+    local bash_dot_files
+    bash_dot_files=$(find "$HOME" -maxdepth 1 -type f -name '.bash*')
 
     # 删除$HOME目录所有.bash开头点文件
     if (echo "$bash_dot_files" | xargs -d '\n' rm -v); then
