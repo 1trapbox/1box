@@ -51,7 +51,6 @@ function install_ohmybash() {
 }
 
 function bash_xdg() {
-    print_echo "正在覆盖重写.bashrc"
     # .bashrc文件路径
     local XDG_CONFIG_HOME="$HOME/.config"
     local bash_xdg_dir="$XDG_CONFIG_HOME/bash"
@@ -59,6 +58,7 @@ function bash_xdg() {
     local bash_dot_files
     bash_dot_files=$(find "$HOME" -maxdepth 1 -type f -name '.bash*')
 
+    print_echo "正在删除$HOME 目录下所有.bash开头的点文件"
     # 删除$HOME目录所有.bash开头点文件
     if (echo "$bash_dot_files" | xargs -d '\n' rm -v); then
     print_ok "$删除成功 所有$HOME/目录下所有.bash开头文件 \n 文件列表= \n $bash_dot_files"
