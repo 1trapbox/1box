@@ -209,6 +209,6 @@ install_zshrc
 install_zshenv
 #set_zshenv
 install_zinit
-
+for_sudo
 # end 结束
 exec zsh
