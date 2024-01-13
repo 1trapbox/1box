@@ -6,7 +6,8 @@
 alias xcopy="xclip -selection clipboard"                # 使用xclip复制到系统粘贴板
 alias hh="tr ':' '\n'"                                  # 换行 拼音hh
 alias hist="atuin"                                      # 列出历史记录的目录（默认：所有目录）
-alias fd="fd -H"                                        # 更好的find -H显示隐藏文件
+alias fd="fd -H -c=always"                              # 更好的find -H显示隐藏文件, 永远显示颜色
+alias fdlink="fd -LHl -c=always . "                     # fd查找符号链接
 alias cl="clear"                                        # 洁癖
 alias zshconfig="nano $XDG_CONFIG_HOME/zsh/.zshrc"      # 打开zsh配置文件
 alias toptop="glances"                                  # 系统管理器
