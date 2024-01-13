@@ -1,0 +1,8 @@
+zinit light Aloxaf/fzf-tab                                      # fzf
+#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}                                              # 设置列表颜色以启用文件名着色
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'                       # 设置列表颜色以启用文件名着色
+zstyle ':completion:*:descriptions' format '[%d]'                                                   # 设置描述格式以启用群组支持
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'      # 显示 systemd 单元状态
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept'                                                     # 空格确认
+zstyle ':fzf-tab:*' switch-group F1 F2                                                              # F1 F2左右切换数组
+#zstyle ':fzf-tab:complete:*:options' fzf-preview
