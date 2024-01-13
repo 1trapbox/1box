@@ -82,10 +82,8 @@ function install_packages() {
 
 function install_ohmyzsh() {
     print_echo "正在安装ohmyzsh..."
-
-    # 设置XDG目录规范
+    # 安装到XDG规范目录🆗
     local zsh_xdg_dir="$XDG_CONFIG_HOME/zsh"
-    export XDG_DATA_HOME="$HOME/.local/share"
     export ZSH="$XDG_DATA_HOME/oh-my-zsh"
     export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
@@ -108,9 +106,8 @@ function install_ohmyzsh() {
 }
 
 
-function re_zshrc() {
-    print_echo "正在重写 .zshrc 配置文件..."
-    # XDG目录规范
+function install_zshrc() {
+    print_echo "正在下载 .zshrc 配置文件..."
     local zsh_config_dir="$XDG_CONFIG_HOME/zsh"
     local zshrc_config_file="$XDG_CONFIG_HOME/zsh/.zshrc"
     local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
@@ -133,6 +130,19 @@ function re_zshrc() {
         else
         print_error "alias.zsh 配置文件下载失败"
     fi
+}
+
+function install_zshenv() {
+    print_echo "正在下载 .zshenv 配置文件..."
+    local zshenv_config_file="$HOME/.zshenv"
+    local zshenv_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshenv"
+
+    if (curl -sl "$zshenv_config_file_url" -o "$zshenv_config_file"); then
+        print_ok ".zshenv 配置文件下载成功 \n 路径=$zshenv_config_file"
+        else
+        print_error ".zshenv 配置文件下载失败"
+    fi
+    source ~/.zshenv
 }
 
 function install_zinit() {
@@ -181,53 +191,11 @@ function all_config() {
     fi
 }
 
-function set_zshenv() {
-    # zsh无法正确启动XDG规范目录的.zshrc
-    # 参考某国内大佬 https://blog.quarticcat.com/zh/posts/how-do-i-make-my-zsh-smooth-as-fuck/
-    # 某stackoverflow https://stackoverflow.com/questions/21162988/how-to-make-zsh-search-configuration-in-xdg-config-home
-    # 某superuser问答 https://superuser.com/questions/1799400/xdg-base-directory-environment-variables-not-respected-by-notionally-compliant-s
-    print_echo "正在创建.zshenv"
-    local zshenv_file="$HOME/.zshenv"
-    # 检查文件是否存在
-    if [ ! -e "$zshenv_file" ]; then
-        # 如果文件不存在，则创建
-        touch "$zshenv_file"
-        print_ok ".zshenv已创建 路径=$zshenv_file"
-    else
-        print_ok ".zshenv已存在 路径=$zshenv_file"
-    fi
-
-    # 使用 tee 和 Here Document 写入内容
-    print_echo "正在重写.zshenv"
-    if (tee "$zshenv_file" > /dev/null <<EOF
-# 环境变量 - XDG目录规范
-export XDG_CONFIG_HOME="$HOME/.config"                  # 用户 特定配置的目录（类似于 /etc）
-export XDG_CACHE_HOME="$HOME/.cache"                    # 用户 指定的非必要（缓存）数据的写入位置（类似于 /var/cache）
-export XDG_DATA_HOME="$HOME/.local/share"               # 用户 特定数据文件的写入位置（类似于 /usr/share）
-export XDG_STATE_HOME="$HOME/.local/state"              # 用户 特定状态文件应写入的位置（类似于 /var/lib）
-export XDG_DATA_DIRS="/usr/local/share"                 # 全局 存储数据文件
-export XDG_CONFIG_DIRS="/etc/xdg"                       # 全局 默认配置文件
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"                   # zsh指定配置文件目录 (放至.zshenv)
-
-# 环境变量 - asdf XDG目录规范
-# npm config ls -l | grep /
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/       # npm指定配置文件目录 - 用户 --userconfig
-export NPM_CONFIG_GLOBALCONFIG=$XDG_CONFIG_HOME/npm     # npm指定配置文件目录 - 全局 --globalconfig
-export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
-export NPM_CONFIG_TMP=$XDG_RUNTIME_DIR/npm
-export NPM_init-module
-EOF
-    ); then
-        print_ok "覆盖重写成功 \n 路径=$zshenv_file 覆盖重写成功"
-    else
-        print_error "覆盖重写失败 \n 路径=$zshenv_file 覆盖重写成功"
-    fi
-}
-
 update_system
 install_packages
 install_ohmyzsh
 all_config
-re_zshrc
-set_zshenv
+install_zshrc
+install_zshenv
+#set_zshenv
 install_zinit

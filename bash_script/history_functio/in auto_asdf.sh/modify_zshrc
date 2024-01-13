@@ -1,0 +1,28 @@
+# 使用tee写入
+function modify_zshrc() {
+    # 定义一些变量
+    zshrc_file="$HOME/.zshrc"
+    search_line="zinit load asdf-vm/asdf"
+    line_number=$(grep -n "$search_line" "$zshrc_file" | cut -d: -f1)
+    # 将内容存储在tmpfile
+    tmpfile=$(sudo mktemp)
+    sudo tee "$tmpfile" <<'EOF'
+# asdf 安装的一些环境变量
+export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
+#eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
+#eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
+#export GOPATH=$(go env GOPATH)                                 # GOPATH form go env
+#export GOROOT=$(go env GOROOT)                                 # GOROOT form go env
+#export PATH="$PATH:$GOPATH/bin"                                # GO BIN二进制
+EOF
+
+
+    # 搜索匹配的行
+    if grep -q "$search_line" "$zshrc_file"; then
+    # 在匹配行的下一行插入内容
+        sudo sed -i "${line_number}r ${tmpfile}" "${zshrc_file}"
+        print_ok "修改 $zshrc_file 成功"
+    else
+        print_error "修改 $zshrc_file 失败"
+    fi
+}

@@ -170,35 +170,7 @@ function install_all() {
     fi
 }
 
-function modify_zshrc() {
-    # 定义一些变量
-    zshrc_file="$HOME/.zshrc"
-    search_line="zinit load asdf-vm/asdf"
-    line_number=$(grep -n "$search_line" "$zshrc_file" | cut -d: -f1)
-    # 将内容存储在tmpfile
-    tmpfile=$(sudo mktemp)
-    sudo tee "$tmpfile" <<'EOF'
-# asdf 安装的一些环境变量
-export PATH="$PATH:$HOME/.local/bin"                            # pipx bin $PATH
-eval "$(register-python-argcomplete pipx)"                      # pipx    shell自动补全
-eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"                    # pipenv  shell自动补全
-#export GOPATH=$(go env GOPATH)                                 # GOPATH form go env
-#export GOROOT=$(go env GOROOT)                                 # GOROOT form go env
-#export PATH="$PATH:$GOPATH/bin"                                # GO BIN二进制
-EOF
-
-
-    # 搜索匹配的行
-    if grep -q "$search_line" "$zshrc_file"; then
-    # 在匹配行的下一行插入内容
-        sudo sed -i "${line_number}r ${tmpfile}" "${zshrc_file}"
-        print_ok "修改 $zshrc_file 成功"
-    else
-        print_error "修改 $zshrc_file 失败"
-    fi
-}
-function for_xdg() {
-    print_echo "配置XDG规范目录"
+function asdf_for_xdg() {
     # XDG 目录规范
     local XDG_CONFIG_HOME="$HOME/.config"
     local XDG_CACHE_HOME="$HOME/.cache"
@@ -208,22 +180,42 @@ function for_xdg() {
     local XDG_CONFIG_DIRS="/etc/xdg"
     # npm配置xdg规范目录
     local npm_config_dir="$XDG_CONFIG_HOME/npm"
+    local npm_config_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/npm/npmrc"
     # 目录不存在则创建
+    print_echo "配置npm(asdf) XDG规范目录"
     if [ ! -d "$npm_config_dir" ]; then
         mkdir -p "$npm_config_dir"
     fi
 
-    if (curl -sl "$starship_config_file_url" -o "$starship_config_file"); then
-        print_ok "starship 配置文件下载成功\n 路径=$starship_config_file"
+    if (curl -sl "$npm_config_url" -o "$npm_config_dir/npmrc"); then
+        print_ok "npmrc 配置文件下载成功\n 路径=$npm_config_dir/npmrc"
     else
-        print_error "$starship_config_file 配置文件下载失败"
+        print_error "npmrc 配置文件下载失败"
     fi
 
 }
 
+function asdf_for_zshenv() {
+    # 定义变量
+    zshenv_file="$HOME/.zshenv"
+    search_line="# asdf - env"
+    line_number=$(grep -n "$search_line" "$zshenv_file" | cut -d: -f1)
 
+    # 使用curl获取远程文件内容 
+    asdf_env_url=$(curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/asdf/env)
 
+    # 搜索匹配的行
+    if grep -q "$search_line" "$zshenv_file"; then
+        # 在匹配行的下一行插入远程文件内容
+        sudo sed -i "${line_number}r /dev/stdin" "${zshenv_file}" <<< "$asdf_env_url"
+        print_ok "修改 $zshenv_file 成功"
+    else
+        print_error "修改 $zshenv_file 失败"
+    fi
+}
 
 depend
 install_all
-modify_zshrc
+#modify_zshrc
+asdf_for_xdg
+asdf_for_zshenv

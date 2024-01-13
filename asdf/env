@@ -1,0 +1,5 @@
+# npm config ls -l | grep /
+export npm_config_userconfig=$XDG_CONFIG_HOME/npm/npmrc   # npm指定配置文件目录 - 用户 --userconfig
+export PATH="$PATH:$HOME/.local/bin"                      # pipx bin $PATH
+eval "$(register-python-argcomplete pipx)"                # pipx    shell自动补全
+eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"              # pipenv  shell自动补全
