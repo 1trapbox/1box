@@ -1,14 +1,11 @@
-### 新机器安装配置 zsh (远程调用)
-#### (远程调用)
-```
-curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_zsh_shell.sh | bash
-```
+### 新机器安装配置 zsh
 #### (下载到本地使用)
 ```
 curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_zsh_shell.sh > auto_zsh_shell.sh && chmod +x auto_zsh_shell.sh && bash auto_zsh_shell.sh
 ```
 ---
 ### 安装配置bash
+#### (下载到本地使用)
 ```
 curl -sSL https://raw.githubusercontent.com/1trapbox/1box/main/bash_script/auto_bash_shell.sh > auto_bash_shell.sh && chmod +x auto_bash_shell.sh && bash auto_bash_shell.sh
 
