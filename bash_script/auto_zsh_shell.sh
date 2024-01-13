@@ -201,13 +201,21 @@ function set_zshenv() {
     print_echo "正在重写.zshenv"
     if (tee "$zshenv_file" > /dev/null <<EOF
 # 环境变量 - XDG目录规范
-export XDG_CONFIG_HOME="$HOME/.config"          # 用户 特定配置的目录（类似于 /etc）
-export XDG_CACHE_HOME="$HOME/.cache"            # 用户 指定的非必要（缓存）数据的写入位置（类似于 /var/cache）
-export XDG_DATA_HOME="$HOME/.local/share"       # 用户 特定数据文件的写入位置（类似于 /usr/share）
-export XDG_STATE_HOME="$HOME/.local/state"      # 用户 特定状态文件应写入的位置（类似于 /var/lib）
-export XDG_DATA_DIRS="/usr/local/share"         # 全局 存储数据文件
-export XDG_CONFIG_DIRS="/etc/xdg"               # 全局 默认配置文件
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"           # zsh指定配置文件目录 (放至.zshenv)
+export XDG_CONFIG_HOME="$HOME/.config"                  # 用户 特定配置的目录（类似于 /etc）
+export XDG_CACHE_HOME="$HOME/.cache"                    # 用户 指定的非必要（缓存）数据的写入位置（类似于 /var/cache）
+export XDG_DATA_HOME="$HOME/.local/share"               # 用户 特定数据文件的写入位置（类似于 /usr/share）
+export XDG_STATE_HOME="$HOME/.local/state"              # 用户 特定状态文件应写入的位置（类似于 /var/lib）
+export XDG_DATA_DIRS="/usr/local/share"                 # 全局 存储数据文件
+export XDG_CONFIG_DIRS="/etc/xdg"                       # 全局 默认配置文件
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"                   # zsh指定配置文件目录 (放至.zshenv)
+
+# 环境变量 - asdf XDG目录规范
+# npm config ls -l | grep /
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/       # npm指定配置文件目录 - 用户 --userconfig
+export NPM_CONFIG_GLOBALCONFIG=$XDG_CONFIG_HOME/npm     # npm指定配置文件目录 - 全局 --globalconfig
+export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
+export NPM_CONFIG_TMP=$XDG_RUNTIME_DIR/npm
+export NPM_init-module
 EOF
     ); then
         print_ok "覆盖重写成功 \n 路径=$zshenv_file 覆盖重写成功"

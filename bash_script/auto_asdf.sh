@@ -197,6 +197,32 @@ EOF
         print_error "修改 $zshrc_file 失败"
     fi
 }
+function for_xdg() {
+    print_echo "配置XDG规范目录"
+    # XDG 目录规范
+    local XDG_CONFIG_HOME="$HOME/.config"
+    local XDG_CACHE_HOME="$HOME/.cache"
+    local XDG_DATA_HOME="$HOME/.local/share"
+    local XDG_STATE_HOME="$HOME/.local/state"
+    local XDG_DATA_DIRS="/usr/local/share"
+    local XDG_CONFIG_DIRS="/etc/xdg"
+    # npm配置xdg规范目录
+    local npm_config_dir="$XDG_CONFIG_HOME/npm"
+    # 目录不存在则创建
+    if [ ! -d "$npm_config_dir" ]; then
+        mkdir -p "$npm_config_dir"
+    fi
+
+    if (curl -sl "$starship_config_file_url" -o "$starship_config_file"); then
+        print_ok "starship 配置文件下载成功\n 路径=$starship_config_file"
+    else
+        print_error "$starship_config_file 配置文件下载失败"
+    fi
+
+}
+
+
+
 
 depend
 install_all
