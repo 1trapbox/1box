@@ -151,7 +151,7 @@ function install_zinit() {
     else
     print_error "zinit安装失败"
     fi
-    exec zsh
+    #exec zsh
 }
 
 function all_config() {
@@ -191,6 +191,16 @@ function all_config() {
     fi
 }
 
+function for_sudo {
+    # 为了sudo可以方便执行zinit安装的二进制
+    # fd -LHl -c=always . /usr/local/bin
+    if (
+    sudo ln -s $HOME/.local/share/zinit/plugins/neovim---neovim/nvim-linux64/bin/nvim /usr/local/bin/nvim
+    ); then
+    print_ok "nvim 软链接设置成功 \n 链接到路径=/usr/local/bin/nvim"
+    fi
+}
+
 update_system
 install_packages
 install_ohmyzsh
@@ -199,3 +209,6 @@ install_zshrc
 install_zshenv
 #set_zshenv
 install_zinit
+
+# end 结束
+exec zsh
