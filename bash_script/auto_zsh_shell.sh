@@ -98,20 +98,11 @@ function install_ohmyzsh() {
     fi
 
     print_echo "正在将zsh设置为默认shell..."
-    if [ -t 1 ]; then
-        if chsh -s $(which zsh); then
-        print_ok "zsh 设置为默认 shell 成功"
+    if (chsh -s $(which zsh)); then
+        print_ok "设置zsh为默认shell 成功"
     else
-        print_error "zsh 设置为默认 shell 失败"  
-    fi  
-    else
-        print_error "没有可用的 tty，跳过设置默认 shell \n 请手动自行设置zsh为默认shell"
+        print_error "设置zsh为默认shell 失败"
     fi
-#    if (chsh -s $(which zsh)); then
-#        print_ok "设置zsh为默认shell 成功"
-#    else
-#        print_error "设置zsh为默认shell 失败"
-#    fi
 }
 
 
