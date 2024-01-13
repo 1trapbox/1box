@@ -1,9 +1,0 @@
-# 安装zinit (使用.zshenv之前的)
-function install_zinit() {
-    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
-    print_echo "zinit安装成功"
-    else
-    print_error "zinit安装失败"
-    fi
-    exec zsh
-}
