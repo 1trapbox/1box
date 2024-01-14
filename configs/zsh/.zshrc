@@ -42,8 +42,7 @@ zinit from"gh-r" lbin"!httpx" for projectdiscovery/httpx        # 快速且多�
 # 🌟 by @zinit-annex-binary-symlink 带参数的
 # ---------------------------------------------------------------
 zinit from"gh-r" lbin"!fzf" for junegunn/fzf                    # fzf
-export FZF_DEFAULT_COMMAND='fd --type f'
-#export FZF_DEFAULT_COMMAND='find . -type f'
+export FZF_DEFAULT_COMMAND='fd --type f -u'
 # ---------------------------------------------------------------
 zinit from"gh-r" lbin"!navi" for @denisidoro/navi               # navi 备忘录
 eval "$(navi widget zsh)"                                       # shell小部件
@@ -78,5 +77,5 @@ bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
     for key in $up[@]; do
         bindkey "$key" _atuin_search_widget
     done
-    bindkey '^r' _atuin_search_widget
 }
+bindkey '^r' _atuin_search_widget
