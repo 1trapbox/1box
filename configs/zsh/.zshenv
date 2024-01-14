@@ -6,5 +6,6 @@ export XDG_STATE_HOME="$HOME/.local/state"      # 用户 特定状态文件应�
 export XDG_DATA_DIRS="/usr/local/share"         # 全局 存储数据文件
 export XDG_CONFIG_DIRS="/etc/xdg"               # 全局 默认配置文件
 export ZDOTDIR="$HOME/.config/zsh"              # zsh指定配置文件目录 (放至.zshenv)
+skip_global_compinit=1                          # 跳过全局 compinit 的加载, 加速zsh启动
 
 # asdf - env
