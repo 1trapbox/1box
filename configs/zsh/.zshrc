@@ -33,21 +33,27 @@ zinit load asdf-vm/asdf                                         # asdf版本管�
 # 🌟 by @zinit-annex-binary-symlink
 zinit from"gh-r" lbin"!eza" for @eza-community/eza              # 维护更勤快的exa
 zinit from"gh-r" lbin"!bat" for @sharkdp/bat                    # 替代cat
+export BAT_THEME="TwoDark"                                      # bat主题
 zinit from"gh-r" lbin"!rg" for @BurntSushi/ripgrep              # rg
 zinit from"gh-r" lbin"!fd" for @sharkdp/fd                      # fd
 zinit from"gh-r" lbin"!nvim" for @neovim/neovim                 # 使用nvim
-zinit from"gh-r" lbin"!glow" for charmbracelet/glow             # 在 CLI 上渲染 Markdown
-zinit from"gh-r" lbin"!httpx" for projectdiscovery/httpx        # 快速且多功能的HTTP工具包
+zinit from"gh-r" lbin"!glow" for @charmbracelet/glow             # 在 CLI 上渲染 Markdown
+zinit from"gh-r" lbin"!httpx" for @projectdiscovery/httpx        # 快速且多功能的HTTP工具包
 # ---------------------------------------------------------------
 # 🌟 by @zinit-annex-binary-symlink 带参数的
 # ---------------------------------------------------------------
-zinit from"gh-r" lbin"!fzf" for junegunn/fzf                    # fzf
+zinit from"gh-r" lbin"!vivid" for @sharkdp/vivid                 # LS_COLORS 各种颜色支持
+export LS_COLORS="$(vivid generate snazzy)"
+# ---------------------------------------------------------------
+zinit from"gh-r" lbin"!fzf" for @junegunn/fzf                    # fzf
 export FZF_DEFAULT_COMMAND='fd --type f -u'
+export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=numbers,header,rule,snip --line-range=1: {}"'
 # ---------------------------------------------------------------
 zinit from"gh-r" lbin"!navi" for @denisidoro/navi               # navi 备忘录
 eval "$(navi widget zsh)"                                       # shell小部件
 # ---------------------------------------------------------------
-zinit from"gh-r" lbin"!atuin" for @atuinsh/atuin                # atuin/shell的云同步历史记录
+zinit from"gh-r" lbin"!atuin" for @atuinsh/atuin                # atuin 历史记录
+export ATUIN_CONFIG_DIR=$XDG_CONFIG_HOME/atuin
 eval "$(atuin init zsh)"                                        # atuin zsh小部件
 #bindkey '^r' _atuin_search_widget                              # atuin ctrl+r 快捷键
 # ---------------------------------------------------------------

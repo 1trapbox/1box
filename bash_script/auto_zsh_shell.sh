@@ -155,7 +155,7 @@ function install_zinit() {
 }
 
 function all_config() {
-    print_echo "正在进行一些程序的配置..."
+    print_echo "正在进行创建一些程序的配置文件..."
     print_echo "正在创建 atuin配置文件"
     # XDG 目录规范
     local atuin_config_dir="$XDG_CONFIG_HOME/atuin"
@@ -189,7 +189,6 @@ function all_config() {
     else
         print_error "$starship_config_file 配置文件下载失败"
     fi
-}
 
 function for_sudo {
     # 为了sudo可以方便执行zinit安装的二进制
