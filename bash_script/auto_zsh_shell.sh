@@ -192,8 +192,17 @@ function install_zshrc() {
     fi
 }
 
+# 安装zinit (使用.zshenv之前的)
+function install_zinit() {
+    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
+    print_echo "zinit安装成功"
+    else
+    print_error "zinit安装失败"
+    fi
+}
+
+# 为了sudo可以方便执行zinit安装的二进制
 function for_sudo {
-    # 为了sudo可以方便执行zinit安装的二进制
     # fd -LHl -c=always . /usr/local/bin
     if (
     sudo ln -s $HOME/.local/share/zinit/plugins/neovim---neovim/nvim-linux64/bin/nvim /usr/local/bin/nvim
@@ -211,3 +220,4 @@ install_zinit
 for_sudo
 # end 结束
 exec zsh
+source ~/.zshrc
