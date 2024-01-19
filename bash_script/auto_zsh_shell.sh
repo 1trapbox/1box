@@ -145,7 +145,7 @@ function all_config() {
 function install_zshrc() {
     print_echo "正在下载 .zshrc 配置文件..."
     # .zshrc
-    local zsh_config_dir="$XDG_CONFIG_HOME/zsh"
+    local zsh_xdg_dir="$XDG_CONFIG_HOME/zsh"
     local zshrc_config_file="$HOME/.zshrc"
     local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
     # xdg.zsh
@@ -159,8 +159,8 @@ function install_zshrc() {
     local zshrc_export_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/export.zsh"
 
     # zsh目录不存在则创建
-    if [ ! -d "$zsh_config_dir" ]; then
-        mkdir -p "$zsh_config_dir"
+    if [ ! -d "$zsh_xdg_dir" ]; then
+        mkdir -p "$zsh_xdg_dir"
     fi
 
     # .zshrc
