@@ -189,6 +189,7 @@ function all_config() {
     else
         print_error "$starship_config_file 配置文件下载失败"
     fi
+}
 
 function for_sudo {
     # 为了sudo可以方便执行zinit安装的二进制
