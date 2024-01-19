@@ -3,7 +3,6 @@
 
 # XDG目录规范
 source "$HOME/.config/zsh/xdg.zsh"              # XDG规范目录
-source $XDG_CONFIG_HOME/zsh/export.zsh          # export.zsh路径
 source $XDG_CONFIG_HOME/zsh/alias.zsh           # alias.zsh路径
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"           # ohmyzsh安装路径
 skip_global_compinit=1                          # 跳过全局 compinit 的加载, 加速zsh启动
@@ -68,3 +67,5 @@ bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
     done
 }
 bindkey '^r' _atuin_search_widget
+# ---------------------------------------------------------------
+source $XDG_CONFIG_HOME/zsh/export.zsh          # export.zsh路径
