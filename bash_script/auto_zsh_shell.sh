@@ -31,7 +31,7 @@ function print_error() {
     # 重定向错误信息到日志文件 
     exec 2>> /tmp/error.txt
     # 记录当前函数名
-    echo "From function: ${FUNCNAME[1]}" >> /tmp/nginx_error.txt
+    echo "From function: ${FUNCNAME[1]}" >> /tmp/auto_zsh_error.txt
     # 样式
     error="${error_style}${bold}[ERROR]${font}"
     echo -e "${error}"
@@ -105,55 +105,6 @@ function install_ohmyzsh() {
     fi
 }
 
-
-function install_zshrc() {
-    print_echo "正在下载 .zshrc 配置文件..."
-    local zsh_config_dir="$XDG_CONFIG_HOME/zsh"
-    local zshrc_config_file="$XDG_CONFIG_HOME/zsh/.zshrc"
-    local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
-    local zshrc_alias_file="$XDG_CONFIG_HOME/zsh/alias.zsh"
-    local zshrc_alias_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/alias.zsh"
-
-    # 目录不存在则创建
-    if [ ! -d "$zsh_config_dir" ]; then
-        mkdir -p "$zsh_config_dir"
-    fi
-
-    if (curl -sl "$zshrc_config_file_url" -o "$zshrc_config_file"); then
-        print_ok ".zshrc 配置文件下载成功 \n 路径=$zshrc_config_file"
-        else
-        print_error ".zshrc 配置文件下载失败"
-    fi
-
-    if (curl -sl "$zshrc_alias_file_url" -o "$zshrc_alias_file"); then
-        print_ok "alias.zsh 配置文件下载成功 \n 路径=$zshrc_alias_file"
-        else
-        print_error "alias.zsh 配置文件下载失败"
-    fi
-}
-
-function install_zshenv() {
-    print_echo "正在下载 .zshenv 配置文件..."
-    local zshenv_config_file="$HOME/.zshenv"
-    local zshenv_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshenv"
-
-    if (curl -sl "$zshenv_config_file_url" -o "$zshenv_config_file"); then
-        print_ok ".zshenv 配置文件下载成功 \n 路径=$zshenv_config_file"
-        else
-        print_error ".zshenv 配置文件下载失败"
-    fi
-    source ~/.zshenv
-}
-
-function install_zinit() {
-    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
-    print_echo "zinit安装成功"
-    else
-    print_error "zinit安装失败"
-    fi
-    #exec zsh
-}
-
 function all_config() {
     print_echo "正在进行创建一些程序的配置文件..."
     print_echo "正在创建 atuin配置文件"
@@ -189,6 +140,68 @@ function all_config() {
     else
         print_error "$starship_config_file 配置文件下载失败"
     fi
+}
+
+function install_zshrc() {
+    print_echo "正在下载 .zshrc 配置文件..."
+    # .zshrc
+    local zsh_config_dir="$XDG_CONFIG_HOME/zsh"
+    local zshrc_config_file="$XDG_CONFIG_HOME/zsh/.zshrc"
+    local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
+    # alias.zsh
+    local zshrc_alias_file="$XDG_CONFIG_HOME/zsh/alias.zsh"
+    local zshrc_alias_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/alias.zsh"
+    # export.zsh
+    local zshrc_export_file="$XDG_CONFIG_HOME/zsh/export.zsh"
+    local zshrc_export_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/export.zsh"
+
+    # zsh目录不存在则创建
+    if [ ! -d "$zsh_config_dir" ]; then
+        mkdir -p "$zsh_config_dir"
+    fi
+
+    if (curl -sl "$zshrc_config_file_url" -o "$zshrc_config_file"); then
+        print_ok ".zshrc 配置文件下载成功 \n 路径=$zshrc_config_file"
+        else
+        print_error ".zshrc 配置文件下载失败"
+    fi
+
+    # alias.zsh
+    if (curl -sl "$zshrc_alias_file_url" -o "$zshrc_alias_file"); then
+        print_ok "alias.zsh 配置文件下载成功 \n 路径=$zshrc_alias_file"
+        else
+        print_error "alias.zsh 配置文件下载失败"
+    fi
+
+    # export.zsh
+    if (curl -sl "$zshrc_export_file_url" -o "$zshrc_export_file"); then
+        print_ok "export.zsh 配置文件下载成功 \n 路径=$zshrc_export_file"
+        else
+        print_error "export.zsh 配置文件下载失败"
+    fi
+}
+
+
+function install_zshenv() {
+    print_echo "正在下载 .zshenv 配置文件..."
+    local zshenv_config_file="$HOME/.zshenv"
+    local zshenv_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshenv"
+
+    if (curl -sl "$zshenv_config_file_url" -o "$zshenv_config_file"); then
+        print_ok ".zshenv 配置文件下载成功 \n 路径=$zshenv_config_file"
+        else
+        print_error ".zshenv 配置文件下载失败"
+    fi
+    source ~/.zshenv
+}
+
+function install_zinit() {
+    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
+    print_echo "zinit安装成功"
+    else
+    print_error "zinit安装失败"
+    fi
+    #exec zsh
 }
 
 function for_sudo {
