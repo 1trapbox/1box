@@ -85,7 +85,7 @@ function install_ohmyzsh() {
     # 安装到XDG规范目录🆗
     local zsh_xdg_dir="$XDG_CONFIG_HOME/zsh"
     export ZSH="$XDG_DATA_HOME/oh-my-zsh"
-    export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+    #export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
     if [ ! -d "$zsh_xdg_dir" ]; then
         mkdir -p "$zsh_xdg_dir"
@@ -146,7 +146,7 @@ function install_zshrc() {
     print_echo "正在下载 .zshrc 配置文件..."
     # .zshrc
     local zsh_config_dir="$XDG_CONFIG_HOME/zsh"
-    local zshrc_config_file="$XDG_CONFIG_HOME/zsh/.zshrc"
+    local zshrc_config_file="$HOME/.zshrc"
     local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
     # xdg.zsh
     local xdg_file="$XDG_CONFIG_HOME/zsh/xdg.zsh"
