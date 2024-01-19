@@ -2,6 +2,7 @@
 # encoding: utf-8
 config_version: "0.22"
 
+## 设置指定应用默认为英文输入法
 app_options:
   brave.exe: {ascii_mode: true}
   cmd.exe: {ascii_mode: true}
@@ -18,13 +19,15 @@ show_notifications_when: always
 style:
   antialias_mode: default
   ascii_tip_follow_cursor: false
-  color_scheme: ps4
-  font_face: LXGW Neo XiHei
-  label_font_face: LXGW Neo XiHei
-  comment_font_face: LXGW Neo XiHei
-  font_point: 15
-  label_font_point: 15
-  comment_font_point: 15
+  color_scheme: ps4                     # 自定义皮肤
+  font_face: LXGW Neo XiHei             # 界面字体
+  label_font_face: LXGW Neo XiHei       # 标签字体
+  comment_font_face: LXGW Neo XiHei     # 注释字体
+  font_point: 15                        # 界面字体大小
+  label_font_point: 15                  # 标签字体大小
+  comment_font_point: 15                # 注释字体大小
+
+# 以下都是默认选项 未修改
   horizontal: false
   fullscreen: false
   inline_preedit: false
