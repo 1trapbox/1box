@@ -148,6 +148,9 @@ function install_zshrc() {
     local zsh_config_dir="$XDG_CONFIG_HOME/zsh"
     local zshrc_config_file="$XDG_CONFIG_HOME/zsh/.zshrc"
     local zshrc_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc"
+    # xdg.zsh
+    local xdg_file="$XDG_CONFIG_HOME/zsh/xdg.zsh"
+    local xdg_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/xdg.zsh"
     # alias.zsh
     local zshrc_alias_file="$XDG_CONFIG_HOME/zsh/alias.zsh"
     local zshrc_alias_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/alias.zsh"
@@ -160,10 +163,18 @@ function install_zshrc() {
         mkdir -p "$zsh_config_dir"
     fi
 
+    # .zshrc
     if (curl -sl "$zshrc_config_file_url" -o "$zshrc_config_file"); then
         print_ok ".zshrc 配置文件下载成功 \n 路径=$zshrc_config_file"
         else
         print_error ".zshrc 配置文件下载失败"
+    fi
+
+    # xdg.zsh
+    if (curl -sl "$xdg_file_url" -o "$xdg_file"); then
+        print_ok "xdg.zsh 配置文件下载成功 \n 路径=$xdg_file"
+        else
+        print_error "xdg.zsh 配置文件下载失败"
     fi
 
     # alias.zsh
@@ -181,29 +192,6 @@ function install_zshrc() {
     fi
 }
 
-
-function install_zshenv() {
-    print_echo "正在下载 .zshenv 配置文件..."
-    local zshenv_config_file="$HOME/.zshenv"
-    local zshenv_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshenv"
-
-    if (curl -sl "$zshenv_config_file_url" -o "$zshenv_config_file"); then
-        print_ok ".zshenv 配置文件下载成功 \n 路径=$zshenv_config_file"
-        else
-        print_error ".zshenv 配置文件下载失败"
-    fi
-    source ~/.zshenv
-}
-
-function install_zinit() {
-    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
-    print_echo "zinit安装成功"
-    else
-    print_error "zinit安装失败"
-    fi
-    #exec zsh
-}
-
 function for_sudo {
     # 为了sudo可以方便执行zinit安装的二进制
     # fd -LHl -c=always . /usr/local/bin
@@ -219,8 +207,6 @@ install_packages
 install_ohmyzsh
 all_config
 install_zshrc
-install_zshenv
-#set_zshenv
 install_zinit
 for_sudo
 # end 结束

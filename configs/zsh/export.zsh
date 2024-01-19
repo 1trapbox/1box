@@ -14,8 +14,8 @@ export FZF_DEFAULT_OPTS='--preview "bat --color=always --style=numbers,header,ru
 eval "$(navi widget zsh)"                                       # shell小部件
 
 # @atuin
-export ATUIN_CONFIG_DIR=$XDG_CONFIG_HOME/atuin
 eval "$(atuin init zsh)"                                        # atuin zsh小部件
+export ATUIN_CONFIG_DIR=$XDG_CONFIG_HOME/atuin
 #bindkey '^r' _atuin_search_widget                              # atuin ctrl+r 快捷键
 
 # @BAT
@@ -23,3 +23,5 @@ export BAT_THEME="TwoDark"                                      # bat主题
 
 # @vivid
 export LS_COLORS="$(vivid generate snazzy)"                     # LS_COLORS 各种颜色支持
+
+# @asdf

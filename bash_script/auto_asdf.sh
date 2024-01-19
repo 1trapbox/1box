@@ -38,7 +38,14 @@ function print_echo() {
     sleep 3
 }
 
-# https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+# XDG 目录规范
+XDG_CONFIG_HOME="$HOME/.config"
+XDG_CACHE_HOME="$HOME/.cache"
+XDG_DATA_HOME="$HOME/.local/share"
+XDG_STATE_HOME="$HOME/.local/state"
+XDG_DATA_DIRS="/usr/local/share"
+XDG_CONFIG_DIRS="/etc/xdg"
+
 function depend() {
     print_echo "安装python的依赖..."
     if (sudo apt update && sudo apt install -y \
@@ -170,14 +177,7 @@ function install_all() {
     fi
 }
 
-function asdf_for_xdg() {
-    # XDG 目录规范
-    local XDG_CONFIG_HOME="$HOME/.config"
-    local XDG_CACHE_HOME="$HOME/.cache"
-    local XDG_DATA_HOME="$HOME/.local/share"
-    local XDG_STATE_HOME="$HOME/.local/state"
-    local XDG_DATA_DIRS="/usr/local/share"
-    local XDG_CONFIG_DIRS="/etc/xdg"
+function config_for_xdg() {
     # npm配置xdg规范目录
     local npm_config_dir="$XDG_CONFIG_HOME/npm"
     local npm_config_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/npm/npmrc"
@@ -195,27 +195,25 @@ function asdf_for_xdg() {
 
 }
 
-function asdf_for_zshenv() {
+function asdf_for_zsh() {
     # 定义变量
-    zshenv_file="$HOME/.zshenv"
-    search_line="# asdf - env"
+    export_file="$XDG_CONFIG_HOME/zsh/export.zsh"
+    export_file_url=$(curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/asdf/env)
+    search_line="# @asdf"
     line_number=$(grep -n "$search_line" "$zshenv_file" | cut -d: -f1)
 
-    # 使用curl获取远程文件内容 
-    asdf_env_url=$(curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/asdf/env)
-
     # 搜索匹配的行
-    if grep -q "$search_line" "$zshenv_file"; then
+    if grep -q "$search_line" "$export_file"; then
         # 在匹配行的下一行插入远程文件内容
-        sudo sed -i "${line_number}r /dev/stdin" "${zshenv_file}" <<< "$asdf_env_url"
-        print_ok "修改 $zshenv_file 成功"
+        sudo sed -i "${line_number}r /dev/stdin" "${export_file}" <<< "$export_file_url"
+        print_ok "新增内容 $export_file 成功"
     else
-        print_error "修改 $zshenv_file 失败"
+        print_error "新增内容 $export_file 失败"
     fi
 }
 
 depend
 install_all
 #modify_zshrc
-asdf_for_xdg
-asdf_for_zshenv
+config_for_xdg
+asdf_for_zsh

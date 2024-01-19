@@ -1,12 +1,13 @@
 ## .zshrc
-## 更新时间: 2024-1-19
+## 更新时间: 2024-1-10
 
-# XDG目录规范
-source "$HOME/.config/zsh/xdg.zsh"              # XDG规范目录
-source $XDG_CONFIG_HOME/zsh/export.zsh          # export.zsh路径
-source $XDG_CONFIG_HOME/zsh/alias.zsh           # alias.zsh路径
+# 环境变量
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"           # ohmyzsh安装路径
-skip_global_compinit=1                          # 跳过全局 compinit 的加载, 加速zsh启动
+
+# alias
+source $XDG_CONFIG_HOME/zsh/alias.zsh           # alias.zsh路径
+# export
+source $XDG_CONFIG_HOME/zsh/export.zsh          # export.zsh路径
 
 # oh-my-zsh //设置 取消=注释即可
 CASE_SENSITIVE="true"                           # 使用区分大小写的自动补全

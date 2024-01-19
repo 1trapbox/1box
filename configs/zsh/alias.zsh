@@ -1,6 +1,6 @@
 # zsh shell
 # alias 设置
-# 2024-01-10
+# 2024-01-19
 
 # alias设置 - 个人
 alias xcopy="xclip -selection clipboard"                # 使用xclip复制到系统粘贴板
@@ -8,16 +8,16 @@ alias hh="tr ':' '\n'"                                  # 换行 拼音hh
 alias hist="atuin"                                      # 列出历史记录的目录（默认：所有目录）
 alias fd="fd -H -c=always"                              # 更好的find -H显示隐藏文件, 永远显示颜色
 alias cl="clear"                                        # 洁癖
-alias zshconfig="nano $XDG_CONFIG_HOME/zsh/.zshrc"      # 打开zsh配置文件
+alias zshconfig="nano $HOME/.zshrc"                     # 打开zsh配置文件
 alias toptop="glances"                                  # 系统管理器
 alias proxy4="proxychains4"                             # 代理
 alias neofetch="neofetch"                               # neofetch系统信息
 alias nginxconf="cd /opt/nginx/conf"                    # nginx目录
 alias xrayconf="cd /usr/local/etc/xray/"                # xray配置文件目2录
 alias acme.sh=~/.acme.sh/acme.sh                        # acme证书
-alias sourcezsh="source $XDG_CONFIG_HOME/zsh/.zshrc"    # 刷新zsh
+alias sourcezsh="source $HOME/.zshrc"                   # 刷新zsh
 alias setproxy='export http_proxy=http://127.0.0.1:10809; export https_proxy=http://127.0.0.1:10809'
-alias zshrcup="cp $XDG_CONFIG_HOME/zsh/.zshrc $XDG_CONFIG_HOME/zsh/.zshrc && echo "备份.zshrc成功" && curl -sL https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o $XDG_CONFIG_HOME/zsh/.zshrc && "echo 更新.zshrc成功" "
+alias zshrcup="cp $HOME/.zshrc $HOME/.zshrc.bak && echo "备份.zshrc成功" && curl -sL https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshrc -o $HOME/.zshrc && "echo 更新.zshrc成功" "
 
 # alias设置 - 解压缩
 alias gz='tar -xzvf'                                    # gz解压缩

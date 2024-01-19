@@ -1,0 +1,21 @@
+function install_zshenv() {
+    print_echo "正在下载 .zshenv 配置文件..."
+    local zshenv_config_file="$HOME/.zshenv"
+    local zshenv_config_file_url="https://raw.githubusercontent.com/1trapbox/1box/main/configs/zsh/.zshenv"
+
+    if (curl -sl "$zshenv_config_file_url" -o "$zshenv_config_file"); then
+        print_ok ".zshenv 配置文件下载成功 \n 路径=$zshenv_config_file"
+        else
+        print_error ".zshenv 配置文件下载失败"
+    fi
+    source ~/.zshenv
+}
+
+function install_zinit() {
+    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
+    print_echo "zinit安装成功"
+    else
+    print_error "zinit安装失败"
+    fi
+    #exec zsh
+}
