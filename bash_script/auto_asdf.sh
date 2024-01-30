@@ -200,7 +200,7 @@ function asdf_for_zsh() {
     export_file="$XDG_CONFIG_HOME/zsh/export.zsh"
     export_file_url=$(curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/asdf/env)
     search_line="# @asdf"
-    line_number=$(grep -n "$search_line" "$zshenv_file" | cut -d: -f1)
+    line_number=$(grep -n "$search_line" "$export_file" | cut -d: -f1)
 
     # 搜索匹配的行
     if grep -q "$search_line" "$export_file"; then
