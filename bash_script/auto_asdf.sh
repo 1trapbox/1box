@@ -199,7 +199,7 @@ function asdf_for_zsh() {
     # 定义变量
     export_file="$XDG_CONFIG_HOME/zsh/export.zsh"
     export_file_url=$(curl -s https://raw.githubusercontent.com/1trapbox/1box/main/configs/asdf/env)
-    search_line="# @asdf"
+    search_line="# @asdf asdf/env导入"
     line_number=$(grep -n "$search_line" "$export_file" | cut -d: -f1)
 
     # 搜索匹配的行

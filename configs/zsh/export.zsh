@@ -24,4 +24,4 @@ export BAT_THEME="TwoDark"                                      # bat主题
 # @vivid
 export LS_COLORS="$(vivid generate snazzy)"                     # LS_COLORS 各种颜色支持
 
-# @asdf
+# @asdf asdf/env导入
