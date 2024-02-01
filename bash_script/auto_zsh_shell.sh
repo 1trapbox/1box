@@ -195,6 +195,7 @@ function install_zshrc() {
 # 安装zinit (使用.zshenv之前的)
 function install_zinit() {
 #    if (zsh -c "source $XDG_CONFIG_HOME/zsh/.zshrc"); then
+    print_echo "正在安装zinit..."
     if (zsh -c "source $HOME/.zshrc"); then
     print_echo "zinit安装成功"
     else
